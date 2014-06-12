@@ -1,3 +1,10 @@
+/*
+ * SplashScreenScene.cpp
+ * Michael Mancuso
+ * June 9, 2014
+ * Splash Screen and Main Menu for the game.
+*/
+
 #ifndef __SPLASHSCREEN_SCENE_H__
 #define __SPLASHSCREEN_SCENE_H__
 
@@ -6,9 +13,12 @@
 class SplashScreen : public cocos2d::Layer
 {
     public:
-        static cocos2d::Scene createScene();
+        static cocos2d::Scene* createScene();
         virtual bool init();
         CREATE_FUNC(SplashScreen);
+        
+        //callbacks
+        void menuSelectCallback(cocos2d::Ref* sender);
 };
 
 #endif
