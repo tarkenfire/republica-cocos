@@ -311,7 +311,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/AppDelegate.o: \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCNotificationCenter.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h \
  jni/../../Classes/HelloWorldScene.h \
- jni/../../Classes/SplashScreenScene.h
+ jni/../../Classes/SplashScreenScene.h \
+ jni/../../Classes/GameScreenScene.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -938,3 +939,5 @@ jni/../../Classes/AppDelegate.h:
 jni/../../Classes/HelloWorldScene.h:
 
 jni/../../Classes/SplashScreenScene.h:
+
+jni/../../Classes/GameScreenScene.h:

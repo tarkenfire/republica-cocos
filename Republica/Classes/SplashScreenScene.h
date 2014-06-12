@@ -9,6 +9,7 @@
 #define __SPLASHSCREEN_SCENE_H__
 
 #include "cocos2d.h"
+#include "GameScreenScene.h"
 
 class SplashScreen : public cocos2d::Layer
 {

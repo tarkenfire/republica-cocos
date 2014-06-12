@@ -81,7 +81,7 @@ bool SplashScreen::init()
                                           );
                                         
     pOptions->setPosition(Vec2(visibleSize.width - (pOptions->getContentSize().width / 2 + pOptions->getContentSize().width / 8),
-                                pContinue->getPosition().x - 30));
+                                pContinue->getPosition().x - (pContinue->getContentSize().height) + 30));
                                         
     
     pOptions->setTag(3);
@@ -99,17 +99,18 @@ bool SplashScreen::init()
 void SplashScreen::menuSelectCallback(Ref* sender)
 {
     MenuItem* button = (MenuItem*) sender;
+    auto newScene = GameScreen::createScene();
     
     switch (button->getTag())
     {
         case 1: //new game button
-            MessageBox("New Game Pressed", "New Game");
+            Director::getInstance()->replaceScene(newScene);
             break;
         case 2: //continue button
-            MessageBox("Continue Pressed", "Continue");
+            MessageBox("Feature Not Implemented.", "Continue");
             break;
         case 3: // settings buttons
-            MessageBox("Settings Pressed", "Settings");
+            MessageBox("Feature Not Implemeted.", "Settings");
             break;
         default: //error
             break;
