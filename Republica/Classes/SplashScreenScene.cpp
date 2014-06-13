@@ -47,7 +47,7 @@ bool SplashScreen::init()
     //"New Game" button
     auto pNewGame = MenuItemImage::create(
                                                 "btnNewGameUHD.png",
-                                                "btnNewGamePressed.png",
+                                                "btnNewGamePressedUHD.png",
                                                 CC_CALLBACK_1(SplashScreen::menuSelectCallback, this)
                                                );
     
@@ -81,7 +81,7 @@ bool SplashScreen::init()
                                           );
                                         
     pOptions->setPosition(Vec2(visibleSize.width - (pOptions->getContentSize().width / 2 + pOptions->getContentSize().width / 8),
-                                pContinue->getPosition().x - (pContinue->getContentSize().height) + 30));
+                                pContinue->getPosition().x - (pContinue->getContentSize().height) - 30));
                                         
     
     pOptions->setTag(3);
