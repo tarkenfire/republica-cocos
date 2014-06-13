@@ -181,7 +181,7 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
             if (pc > 0)
             {
                 pc--;
-                cf--;
+                cf++;
             }
             break;
         case 30: //pass bill
@@ -233,12 +233,18 @@ void GameScreen::updateUI()
     parser << "PL: " << pl;
     plLabel->setString(parser.str());
     
+    parser.str(std::string());
+    parser.clear();
     
+    parser << "CF: " << cf;
+    cfLabel->setString(parser.str());
     
-    cfLabel->setString("CF: " + cf);
+    parser.str(std::string());
+    parser.clear();
     
-    spLabel->setString("SP: " + support);
-    
+    parser << "SP: " << support;
+    spLabel->setString(parser.str());
+
     //special case for SP, change font color if below 20.
     if (support <= 20)
     {
@@ -249,5 +255,9 @@ void GameScreen::updateUI()
         spLabel->setColor(ccc3(0,0,0));
     }
     
-    scoreLabel->setString("Hi");
+    parser.str(std::string());
+    parser.clear();
+    
+    parser << "Score: " << score;
+    scoreLabel->setString(parser.str());
 }
