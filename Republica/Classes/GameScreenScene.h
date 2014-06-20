@@ -12,8 +12,20 @@
 
 class GameScreen : public cocos2d::Layer
 {
+    
+    
     //TODO: Some of this stuff can (and should) be private
+    
+    //TODO: THIS IS PAPER-BOAT LEVEL LEAKY. Fix memory leaks.
     public:
+        
+        //structs
+        
+        struct Bill
+        {
+            int appeal;
+            int wording;
+        };
         //enums
         enum class MenuType { MAIN, OFFICE, BILL, CAMPAIGN };
         
@@ -29,6 +41,7 @@ class GameScreen : public cocos2d::Layer
         cocos2d::LabelTTF* cfLabel;
         cocos2d::LabelTTF* spLabel;
         cocos2d::LabelTTF* scoreLabel;
+        cocos2d::LabelTTF* billLabel;
         
         int turn = 1;
         int score = 0;
@@ -36,6 +49,8 @@ class GameScreen : public cocos2d::Layer
         int pc = 2;
         int pl = 0;
         int cf = 0;
+        
+        Bill* curBill = nullptr;
         
         
         //member methods
@@ -46,10 +61,16 @@ class GameScreen : public cocos2d::Layer
         void changeBackgrounds(GameScreen::MenuType type);
         
         void onNextTurn();
+        
+        void createBill();
+        bool doesBillExist();
+        void passBill();
+        
         void updateUI();
         
         //callbacks
         void menuSelectCallback(cocos2d::Ref* sender);
+        
 };
 
 #endif
