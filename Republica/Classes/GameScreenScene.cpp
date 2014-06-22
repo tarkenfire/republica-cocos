@@ -6,6 +6,7 @@
 */
 
 #include "GameScreenScene.h"
+
 #include <sstream>
 #include <random>
 
@@ -303,16 +304,37 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
     updateUI();
 }
 
+void GameScreen::onGameEnd()
+{
+    UserDefault::getInstance()->setIntegerForKey("endScore", score);
+    UserDefault::getInstance()->setIntegerForKey("endTurn", turn);
+    
+    //LeaderboardScreen* newScene = (LeaderboardScreen) LeaderboardScreen::createScene();
+    auto newScene = LeaderboardScreen::createScene();
+    
+    
+    
+    Director::getInstance()->replaceScene(newScene);
+    
+}
+
 void GameScreen::onNextTurn()
 {
-    //todo: implement
     
     support--;
     pc+=2;
+    turn++;
     
     if (doesBillExist())
     {
         curBill->appeal--;
+    }
+    
+    //check for game end conditions.
+    
+    if (support <= 0 || turn == 20)
+    {
+        onGameEnd();
     }
 }
 
@@ -357,6 +379,8 @@ void GameScreen::passBill()
     
     curBill = nullptr;
 }
+
+
 
 void GameScreen::updateUI()
 {

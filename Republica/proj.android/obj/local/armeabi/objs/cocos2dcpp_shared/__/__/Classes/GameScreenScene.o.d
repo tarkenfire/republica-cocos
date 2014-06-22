@@ -310,7 +310,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/GameScreenScene.o: \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCBool.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCString.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCNotificationCenter.h \
- /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h \
+ jni/../../Classes/LeaderboardScreenScene.h
 
 jni/../../Classes/GameScreenScene.h:
 
@@ -933,3 +934,5 @@ jni/../../Classes/GameScreenScene.h:
 /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCNotificationCenter.h:
 
 /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h:
+
+jni/../../Classes/LeaderboardScreenScene.h:

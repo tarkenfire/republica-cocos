@@ -9,6 +9,7 @@
 #define __GAMESCREEN_SCENE_H__
 
 #include "cocos2d.h"
+#include "LeaderboardScreenScene.h"
 
 class GameScreen : public cocos2d::Layer
 {
@@ -65,8 +66,10 @@ class GameScreen : public cocos2d::Layer
         void createBill();
         bool doesBillExist();
         void passBill();
+        void onGameEnd();
         
         void updateUI();
+        
         
         //callbacks
         void menuSelectCallback(cocos2d::Ref* sender);
