@@ -313,6 +313,16 @@ void GameScreen::onGameEnd()
     auto newScene = LeaderboardScreen::createScene();
     
     
+    //check ach'ments
+    if (billsPassed == 0)
+    {
+        UserDefault::getInstance()->setBoolForKey("duck", true);
+    }
+    
+    if (support > 0)
+    {
+        UserDefault::getInstance()->setBoolForKey("com", true);
+    }
     
     Director::getInstance()->replaceScene(newScene);
     

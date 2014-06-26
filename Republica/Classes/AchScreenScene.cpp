@@ -41,12 +41,19 @@ bool AchScreen::init()
     achP10 = Sprite::create("achPassTen.png");
     achP15 = Sprite::create("achPassFivteen.png");
     
-    //position ach sprites
+    achPTot = Sprite::create("achMes.png");
+    achCom = Sprite::create("achCom.png");
+    
+    achNeg = Sprite::create("achLameDuck.png");
+    
+    //position ach sprites - lazy positioning
     achP5->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.3));
     achP10->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.3 - 160));
     achP15->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.3 - 320));
     
-    
+    achPTot->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.3 - 480));
+    achCom->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.3 - 640));
+    achNeg->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.3 - 800));
     
     //button
     Vector<MenuItem*> item;
@@ -71,12 +78,42 @@ bool AchScreen::init()
         achP5->setTexture(TextureCache::sharedTextureCache()->addImage("achPassFiveActive.png"));
     }
     
+    if (UserDefault::getInstance()->getBoolForKey("p10"))
+    {
+        achP10->setTexture(TextureCache::sharedTextureCache()->addImage("achPassTenActive.png"));
+    }
+    
+    if (UserDefault::getInstance()->getBoolForKey("p15"))
+    {
+        achP15->setTexture(TextureCache::sharedTextureCache()->addImage("achPassFivteenActive.png"));
+    }
+    
+    if (UserDefault::getInstance()->getBoolForKey("p5") && UserDefault::getInstance()->getBoolForKey("p10")
+        && UserDefault::getInstance()->getBoolForKey("p15"))
+    {
+        achPTot->setTexture(TextureCache::sharedTextureCache()->addImage("achMesActive.png"));
+    }
+    
+    if (UserDefault::getInstance()->getBoolForKey("duck"))
+    {
+        achNeg->setTexture(TextureCache::sharedTextureCache()->addImage("achLameDuckActive.png"));
+    }
+    
+    if (UserDefault::getInstance()->getBoolForKey("com"))
+    {
+        achCom->setTexture(TextureCache::sharedTextureCache()->addImage("achComActive.png"));
+    }
+    
+    
     //add children
     this->addChild(bg, -1);
     this->addChild(soloMenu, 1);
     this->addChild(achP5, 1);
     this->addChild(achP10, 1);
     this->addChild(achP15, 1);
+    this->addChild(achPTot, 1);
+    this->addChild(achCom, 1);
+    this->addChild(achNeg, 1);
 }
 
 void AchScreen::menuSelectCallback(cocos2d::Ref* sender)
