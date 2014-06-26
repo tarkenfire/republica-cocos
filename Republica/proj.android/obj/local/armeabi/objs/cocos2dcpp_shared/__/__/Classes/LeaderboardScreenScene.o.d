@@ -22,6 +22,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/LeaderboardScreenScene.o:
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/stdint.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_types.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/machine/_types.h \
+ /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_wchar_limits.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/posix_types.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/stddef.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/compiler.h \
@@ -310,7 +311,39 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/LeaderboardScreenScene.o:
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCBool.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCString.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCNotificationCenter.h \
- /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/cocos-ext.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/ExtensionMacros.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlExtensions.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCScale9Sprite.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/../../ExtensionMacros.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControl.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlUtils.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlButton.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCInvocation.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlColourPicker.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlHuePicker.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlSaturationBrightnessPicker.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlPotentiometer.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./2d/CCProgressTimer.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlSlider.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlStepper.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlSwitch.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCScrollView/CCScrollView.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./base/CCEventListenerTouch.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./2d/CCActionTween.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/ExtensionMacros.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCScrollView/CCTableView.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCScrollView/CCScrollView.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCScrollView/CCTableViewCell.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCEditBox/CCEditBox.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCEditBox/../CCControlExtension/CCControlExtensions.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/physics-nodes/CCPhysicsDebugNode.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./2d/CCDrawNode.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/physics-nodes/CCPhysicsSprite.h \
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/assets-manager/AssetsManager.h \
+ jni/../../Classes/SplashScreenScene.h \
+ jni/../../Classes/GameScreenScene.h
 
 jni/../../Classes/LeaderboardScreenScene.h:
 
@@ -355,6 +388,8 @@ jni/../../Classes/LeaderboardScreenScene.h:
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_types.h:
 
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/machine/_types.h:
+
+/Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_wchar_limits.h:
 
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/posix_types.h:
 
@@ -933,3 +968,67 @@ jni/../../Classes/LeaderboardScreenScene.h:
 /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCNotificationCenter.h:
 
 /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/cocos-ext.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/ExtensionMacros.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlExtensions.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCScale9Sprite.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/../../ExtensionMacros.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControl.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlUtils.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlButton.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCInvocation.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlColourPicker.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlHuePicker.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlSaturationBrightnessPicker.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlPotentiometer.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./2d/CCProgressTimer.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlSlider.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlStepper.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCControlExtension/CCControlSwitch.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCScrollView/CCScrollView.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./base/CCEventListenerTouch.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./2d/CCActionTween.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/ExtensionMacros.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCScrollView/CCTableView.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCScrollView/CCScrollView.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCScrollView/CCTableViewCell.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCEditBox/CCEditBox.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/GUI/CCEditBox/../CCControlExtension/CCControlExtensions.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/physics-nodes/CCPhysicsDebugNode.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./2d/CCDrawNode.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/physics-nodes/CCPhysicsSprite.h:
+
+/Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/assets-manager/AssetsManager.h:
+
+jni/../../Classes/SplashScreenScene.h:
+
+jni/../../Classes/GameScreenScene.h:

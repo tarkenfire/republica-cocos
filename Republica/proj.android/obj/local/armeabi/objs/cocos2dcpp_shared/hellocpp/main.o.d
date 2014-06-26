@@ -21,6 +21,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/hellocpp/main.o: \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/stdint.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_types.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/machine/_types.h \
+ /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_wchar_limits.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/posix_types.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/stddef.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/compiler.h \
@@ -355,6 +356,8 @@ jni/../../Classes/AppDelegate.h:
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_types.h:
 
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/machine/_types.h:
+
+/Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_wchar_limits.h:
 
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/posix_types.h:
 

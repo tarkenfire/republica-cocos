@@ -365,6 +365,25 @@ void GameScreen::passBill()
     {
         parser << " Bill Passes. Score of " << curBill->wording << " is awarded.";
         score += curBill->wording;
+        billsPassed++;
+        
+        //acheviment checks
+        //cascade flags just in case
+        if (billsPassed >= 15)
+        {
+            UserDefault::getInstance()->setBoolForKey("p15", true);
+            UserDefault::getInstance()->setBoolForKey("p10", true);
+            UserDefault::getInstance()->setBoolForKey("p5", true);
+        }
+        else if (billsPassed >= 10)
+        {
+            UserDefault::getInstance()->setBoolForKey("p10", true);
+            UserDefault::getInstance()->setBoolForKey("p5", true);
+        }
+        else if (billsPassed >= 5)
+        {
+            UserDefault::getInstance()->setBoolForKey("p5", true);
+        }
     }
     else
     {

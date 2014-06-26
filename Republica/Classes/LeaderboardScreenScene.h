@@ -17,10 +17,14 @@ class LeaderboardScreen : public cocos2d::Layer
         virtual bool init();
         CREATE_FUNC(LeaderboardScreen);
         
+        //callback
+        void menuSelectCallback(cocos2d::Ref* sender);
+        
         int playerScore = 0;
         int playerTurn = 0;
         
-        static void setPlayerStats(int const& score, int const& turns);
+    private:
+        std::map<int, std::string> localTopList;
          
 };
 

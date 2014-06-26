@@ -50,6 +50,7 @@ class GameScreen : public cocos2d::Layer
         int pc = 2;
         int pl = 0;
         int cf = 0;
+        int billsPassed = 0;
         
         Bill* curBill = nullptr;
         

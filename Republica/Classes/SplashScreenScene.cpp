@@ -6,6 +6,7 @@
 */
 
 #include "SplashScreenScene.h"
+#include "AchScreenScene.h"
 
 USING_NS_CC;
 
@@ -91,15 +92,37 @@ bool SplashScreen::init()
     auto pMenu = Menu::createWithArray(pMenuItems);
     pMenu->setPosition(Vec2::ZERO);
     
+    
+    //secondary menu
+    Vector<MenuItem*> bMenuItems;
+    
+    //"Options" button
+    auto bAch = MenuItemImage::create(
+                                          "btnAch.png",
+                                          "btnAchPressed.png",
+                                          CC_CALLBACK_1(SplashScreen::menuSelectCallback, this)
+                                          );
+    
+    bAch->setPosition(Vec2( visibleSize.width / 2, bAch->getContentSize().height + 40));
+    bAch->setTag(5);
+    
+    bMenuItems.pushBack(bAch);
+    
+    auto bMenu = Menu::createWithArray(bMenuItems);
+    bMenu->setPosition(Vec2::ZERO);
+    
+    
     //add elements
     this->addChild(bg, -1);
     this->addChild(pMenu, 1);
+    this->addChild(bMenu, 1);
 }
 
 void SplashScreen::menuSelectCallback(Ref* sender)
 {
     MenuItem* button = (MenuItem*) sender;
     auto newScene = GameScreen::createScene();
+    auto achScene = AchScreen::createScene();
     
     switch (button->getTag())
     {
@@ -111,6 +134,9 @@ void SplashScreen::menuSelectCallback(Ref* sender)
             break;
         case 3: // settings buttons
             MessageBox("Feature Not Implemeted.", "Settings");
+            break;
+        case 5: // ach
+            Director::getInstance()->replaceScene(achScene);
             break;
         default: //error
             break;

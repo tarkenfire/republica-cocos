@@ -6,6 +6,8 @@
 */
 
 #include "LeaderboardScreenScene.h"
+#include "extensions/cocos-ext.h"
+#include "SplashScreenScene.h"
 
 USING_NS_CC;
 
@@ -41,17 +43,45 @@ bool LeaderboardScreen::init()
     bg->setScaleX(rX);
     bg->setScaleY(rY);
     
+    //button
+        //button
+    Vector<MenuItem*> item;
+    
+    auto bAch = MenuItemImage::create(
+                                          "btnBack.png",
+                                          "btnBackPressed.png",
+                                          CC_CALLBACK_1(LeaderboardScreen::menuSelectCallback, this)
+                                          );
+    
+    bAch->setPosition(Vec2( visibleSize.width / 2, bAch->getContentSize().height + 40));
+    bAch->setTag(1);
+    
+    item.pushBack(bAch);
+    
+    auto soloMenu = Menu::createWithArray(item);
+    soloMenu->setPosition(Vec2::ZERO);
+    
     //other ui
     int l_score = UserDefault::getInstance()->getIntegerForKey("endScore");
+    
+    
+    //Size* inputSize = new Size(400, 150);
+    //CCEditBox* offlineIn = CCEditBox::create(inputSize, CCScale9Sprite::create("bgMainUHD.png"));
+    
+    //offlineIn->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     
     
     
     
     
     this->addChild(bg, -1);
+    this->addChild(soloMenu, 1);
+    //this->addChild(offlineIn, 2);
 }
 
-void LeaderboardScreen::setPlayerStats(int const& score, int const& turns)
+void LeaderboardScreen::menuSelectCallback(cocos2d::Ref* sender)
 {
-   
+       //only one button, no checks needed
+    auto newScene = SplashScreen::createScene();
+    Director::getInstance()->replaceScene(newScene);
 }

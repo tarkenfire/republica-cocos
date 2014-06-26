@@ -22,6 +22,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/SplashScreenScene.o: \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/stdint.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_types.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/machine/_types.h \
+ /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_wchar_limits.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/posix_types.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/stddef.h \
  /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/compiler.h \
@@ -312,7 +313,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/SplashScreenScene.o: \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCNotificationCenter.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h \
  jni/../../Classes/GameScreenScene.h \
- jni/../../Classes/LeaderboardScreenScene.h
+ jni/../../Classes/LeaderboardScreenScene.h \
+ jni/../../Classes/AchScreenScene.h
 
 jni/../../Classes/SplashScreenScene.h:
 
@@ -357,6 +359,8 @@ jni/../../Classes/SplashScreenScene.h:
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_types.h:
 
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/machine/_types.h:
+
+/Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/sys/_wchar_limits.h:
 
 /Users/tarkenfire/Desktop/Cocos/android-ndk-r9d/platforms/android-9/arch-arm/usr/include/linux/posix_types.h:
 
@@ -939,3 +943,5 @@ jni/../../Classes/SplashScreenScene.h:
 jni/../../Classes/GameScreenScene.h:
 
 jni/../../Classes/LeaderboardScreenScene.h:
+
+jni/../../Classes/AchScreenScene.h:
