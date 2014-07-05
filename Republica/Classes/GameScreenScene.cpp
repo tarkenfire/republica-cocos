@@ -33,7 +33,7 @@ bool GameScreen::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     //set background image
-    bg = Sprite::create("SplashScreenUHD.png");
+    bg = Sprite::create("bgMainUHD.png");
     bg->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
     
     //scale bg to match screen
@@ -42,9 +42,6 @@ bool GameScreen::init()
     
     bg->setScaleX(rX);
     bg->setScaleY(rY);
-    
-    //create "main" menu
-    this->changeMenu(GameScreen::MenuType::MAIN);
     
     int offset = 500;
     
@@ -169,17 +166,59 @@ bool GameScreen::init()
     scoreLabel->setPosition(Vec2(visibleSize.width / 2, scoreLabel->getContentSize().height + padding));
     billLabel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 4));
     
+    //multi-menu system
+    
+    //create all buttons
+    
+    auto mainOfficeButton = MenuItemImage::create(
+                                            "btnGoToOffice.png",
+                                            "btnGoToOfficePressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    mainOfficeButton->setTag(BTN_GO_TO_OFFICE);
+    
+    auto allHillButton = MenuItemImage::create(
+                                            "btnGoToHill.png",
+                                            "btnGoToHillPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    allHillButton->setTag(BTN_GO_TO_HILL);
+    
+    //create menus
+    Vector<MenuItem* > tItems; 
+    tItems.pushBack(mainOfficeButton);
+    
+    mainMenu = Menu::createWithArray(tItems);
+    mainMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    
+    tItems.clear();
+    tItems.pushBack(allHillButton);
+    
+    officeMenu = Menu::createWithArray(tItems);
+    officeMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    
+    tItems.clear();
+    
+    
+    //manually retain to avoid nasty cpp error.
+    mainMenu->retain();
+    officeMenu->retain();
+    
+    
+    
     //add layout to screen
     this->addChild(bg, -1);
-    this->addChild(menu, 1);
-    this->addChild(rightMenu, 1);
-    this->addChild(turnLabel, 2);
-    this->addChild(pcLabel, 2);
-    this->addChild(plLabel, 2);
-    this->addChild(cfLabel, 2);
-    this->addChild(spLabel, 2);
-    this->addChild(scoreLabel, 2);
-    this->addChild(billLabel, 2);
+    this->addChild(mainMenu, 1);
+    
+    //this->addChild(menu, 1);
+    //this->addChild(rightMenu, 1);
+    //this->addChild(turnLabel, 2);
+    //this->addChild(pcLabel, 2);
+    //this->addChild(plLabel, 2);
+    //this->addChild(cfLabel, 2);
+    //this->addChild(spLabel, 2);
+    //this->addChild(scoreLabel, 2);
+    //this->addChild(billLabel, 2);
+    
+    
 }
 
 void GameScreen::changeBackgrounds(GameScreen::MenuType type)
@@ -189,6 +228,9 @@ void GameScreen::changeBackgrounds(GameScreen::MenuType type)
         case GameScreen::MenuType::MAIN:
             bg->setTexture(TextureCache::sharedTextureCache()->addImage("bgMainUHD.png"));
             break;
+        case GameScreen::MenuType::OFFICE:
+            bg->setTexture(TextureCache::sharedTextureCache()->addImage("bgOfficeUHD.png"));
+            break;
         default:
             break;
     }
@@ -196,7 +238,17 @@ void GameScreen::changeBackgrounds(GameScreen::MenuType type)
 
 void GameScreen::changeMenu(GameScreen::MenuType type)
 {
-    
+    switch (type)
+    {
+        case GameScreen::MenuType::MAIN:
+            this->removeChild(officeMenu, false);
+            this->addChild(mainMenu, 1);
+            break;
+        case GameScreen::MenuType::OFFICE:
+            this->removeChild(mainMenu, false);
+            this->addChild(officeMenu, 1);
+            break;
+    }
     
     changeBackgrounds(type);
 }
@@ -207,101 +259,16 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
     
     switch(button->getTag())
     {
-        case 10: //add pl
-            if (pc > 0)
-            {
-                pc--;
-                pl++;
-            }
-            else
-            {
-                MessageBox("Not enough PC to convert to PL", "Not Enough PC");
-            }
+        case BTN_GO_TO_OFFICE:
+            this->changeMenu(GameScreen::MenuType::OFFICE);
             break;
-        case 20: //add cf
-            if (pc > 0)
-            {
-                pc--;
-                cf++;
-            }
-            else
-            {
-                MessageBox("Not enough PC to convert to CF", "Not Enough PC");
-            }
-            break;
-        case 30: //campaign
-            if (cf > 0)
-            {
-                cf--;
-                support++;
-            }
-            else
-            {
-                MessageBox("Not enough CF to launch campaign","Not Enough Funds");
-            }
-            break;
-        case 40: //end turn
-            onNextTurn();
-            break;
-        case 50: //new bill
-            if (doesBillExist())
-            {
-                MessageBox("Only one bill can be created at a time", "Bill Already Created");
-            }
-            else
-            {
-                createBill();
-            }
-            break;
-        case 60: //appeal
-            if (doesBillExist())
-            {
-                if (pl > 0)
-                {
-                    pl--;
-                    curBill->appeal++;
-                }
-                else
-                {
-                    MessageBox("More PL is needed to improve appeal","Not enough PL");
-                }
-            }
-            else
-            {
-                MessageBox("No bill has been created", "No Bill");
-            }
-            break;
-        case 70: //wording
-            if (doesBillExist())
-            {
-                if (pl > 0)
-                {
-                    pl--;
-                    curBill->wording++;
-                }
-                else
-                {
-                    MessageBox("More PL is needed to improve wording", "Not enough PL");
-                }
-            }
-            else
-            {
-                MessageBox("No bill has been created", "No Bill");
-            }
-            break;
-        case 80: //pass bill
-            if (doesBillExist())
-            {
-                passBill();   
-            }
-            else
-            {
-                MessageBox("No bill has been created", "No Bill");
-            }
+        
+        case BTN_GO_TO_HILL:
+            this->changeMenu(GameScreen::MenuType::MAIN);
             break;
     }
     
-    updateUI();
+    //updateUI();
 }
 
 void GameScreen::onGameEnd()
@@ -309,7 +276,6 @@ void GameScreen::onGameEnd()
     UserDefault::getInstance()->setIntegerForKey("endScore", score);
     UserDefault::getInstance()->setIntegerForKey("endTurn", turn);
     
-    //LeaderboardScreen* newScene = (LeaderboardScreen) LeaderboardScreen::createScene();
     auto newScene = LeaderboardScreen::createScene();
     
     

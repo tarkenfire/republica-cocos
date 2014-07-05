@@ -19,6 +19,9 @@ class GameScreen : public cocos2d::Layer
     
     //TODO: THIS IS PAPER-BOAT LEVEL LEAKY. Fix memory leaks.
     public:
+        //button constants
+        static const int BTN_GO_TO_OFFICE = 10;
+        static const int BTN_GO_TO_HILL = 11;
         
         //structs
         
@@ -28,7 +31,7 @@ class GameScreen : public cocos2d::Layer
             int wording;
         };
         //enums
-        enum class MenuType { MAIN, OFFICE, BILL, CAMPAIGN };
+        enum class MenuType { MAIN, OFFICE, HILL};
         
         //member variables
         cocos2d::Sprite* bg;
@@ -43,6 +46,11 @@ class GameScreen : public cocos2d::Layer
         cocos2d::LabelTTF* spLabel;
         cocos2d::LabelTTF* scoreLabel;
         cocos2d::LabelTTF* billLabel;
+        
+        //menus
+        cocos2d::Menu* mainMenu;
+        cocos2d::Menu* floorMenu;
+        cocos2d::Menu* officeMenu;
         
         int turn = 1;
         int score = 0;

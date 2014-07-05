@@ -52,8 +52,7 @@ bool SplashScreen::init()
                                                 CC_CALLBACK_1(SplashScreen::menuSelectCallback, this)
                                                );
     
-    pNewGame->setPosition(Vec2(visibleSize.width - (pNewGame->getContentSize().width / 2 + pNewGame->getContentSize().width / 8),
-                               visibleSize.height / 2 + origin.y));    
+ 
     
     pNewGame->setTag(1);
     
@@ -66,8 +65,6 @@ bool SplashScreen::init()
                                             CC_CALLBACK_1(SplashScreen::menuSelectCallback, this)
                                            );
     
-    pContinue->setPosition(Vec2(visibleSize.width - (pContinue->getContentSize().width / 2 + pContinue->getContentSize().width / 8),
-                                pNewGame->getPosition().x - 30));
     
     pContinue->setTag(2);
     
@@ -81,8 +78,6 @@ bool SplashScreen::init()
                                           CC_CALLBACK_1(SplashScreen::menuSelectCallback, this)
                                           );
                                         
-    pOptions->setPosition(Vec2(visibleSize.width - (pOptions->getContentSize().width / 2 + pOptions->getContentSize().width / 8),
-                                pContinue->getPosition().x - (pContinue->getContentSize().height) - 30));
                                         
     
     pOptions->setTag(3);
@@ -90,7 +85,8 @@ bool SplashScreen::init()
     pMenuItems.pushBack(pOptions);
     
     auto pMenu = Menu::createWithArray(pMenuItems);
-    pMenu->setPosition(Vec2::ZERO);
+    pMenu->alignItemsVerticallyWithPadding(40);
+    pMenu->setPosition(Vec2(visibleSize.width/2, visibleSize.height / 2));
     
     
     //secondary menu
@@ -109,6 +105,7 @@ bool SplashScreen::init()
     bMenuItems.pushBack(bAch);
     
     auto bMenu = Menu::createWithArray(bMenuItems);
+    
     bMenu->setPosition(Vec2::ZERO);
     
     
