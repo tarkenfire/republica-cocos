@@ -43,132 +43,10 @@ bool GameScreen::init()
     bg->setScaleX(rX);
     bg->setScaleY(rY);
     
-    int offset = 500;
-    
-    //TODO: This will need to be dynamic in the future
-    auto tempAddPL = MenuItemImage::create(
-                                            "btnAddPL.png",
-                                            "btnAddPLPressed.png",
-                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    
-    tempAddPL->setPosition(Vec2(visibleSize.width / 4 + origin.x, (visibleSize.height - offset) + origin.y));
-    
-    tempAddPL->setTag(10);
-    menuItems.pushBack(tempAddPL);
-    
-    //left temp menu
-    int btnHeight = tempAddPL->getContentSize().height;
-    int bPadding = 50;
-    
-    auto tempAddCF = MenuItemImage::create(
-                                            "btnAddCF.png",
-                                            "btnAddCFPressed.png",
-                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    
-    tempAddCF->setPosition(Vec2(visibleSize.width / 4, (visibleSize.height - offset) - (btnHeight + bPadding)));
-    
-    tempAddCF->setTag(20);
-    menuItems.pushBack(tempAddCF);
-    
-    auto tempCampaign = MenuItemImage::create(
-                                            "btnCamp.png",
-                                            "btnCampPressed.png",
-                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    
-    tempCampaign->setPosition(Vec2(visibleSize.width / 4, (visibleSize.height - offset) - (btnHeight*2 + bPadding)));
-    
-    tempCampaign->setTag(30);
-    menuItems.pushBack(tempCampaign);
-    
-    auto tempNextTurn = MenuItemImage::create(
-                                            "btnEndTurn.png",
-                                            "btnEndTurnPressed.png",
-                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    
-    tempNextTurn->setPosition(Vec2(visibleSize.width / 4, (visibleSize.height - offset) - (btnHeight*3 + bPadding)));
-    
-    tempNextTurn->setTag(40);
-    menuItems.pushBack(tempNextTurn);
-    
-    menu = Menu::createWithArray(menuItems);
-    menu->setPosition(Vec2::ZERO);
-    
-    //right menu
-    Vector<MenuItem*> rightMenuItems;
-    
-    auto tempNewBill = MenuItemImage::create(
-                                            "btnNewBill.png",
-                                            "btnNewBillPressed.png",
-                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    
-    tempNewBill->setPosition(Vec2(visibleSize.width / 1.35, visibleSize.height - offset));
-    tempNewBill->setTag(50);
-    rightMenuItems.pushBack(tempNewBill);
-    
-    auto tempBillAppeal = MenuItemImage::create(
-                                            "btnAppeal.png",
-                                            "btnAppealPressed.png",
-                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    
-    tempBillAppeal->setPosition(Vec2(visibleSize.width / 1.35, (visibleSize.height - offset) - (btnHeight + bPadding)));
-    tempBillAppeal->setTag(60);
-    rightMenuItems.pushBack(tempBillAppeal);
-    
-    auto tempBillWording = MenuItemImage::create(
-                                            "btnWording.png",
-                                            "btnWordingPressed.png",
-                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    
-    tempBillWording->setPosition(Vec2(visibleSize.width / 1.35, (visibleSize.height - offset) - (btnHeight * 2 + bPadding)));
-    tempBillWording->setTag(70);
-    rightMenuItems.pushBack(tempBillWording);
-    
-    
-    auto tempPassBill = MenuItemImage::create(
-                                            "btnPassBill.png",
-                                            "btnPassBillPressed.png",
-                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    
-    tempPassBill->setPosition(Vec2(visibleSize.width / 1.35 , (visibleSize.height - offset) - (btnHeight * 3 + bPadding)));
-    tempPassBill->setTag(80);
-    rightMenuItems.pushBack(tempPassBill);
-    
-    auto rightMenu = Menu::createWithArray(rightMenuItems);
-    rightMenu->setPosition(Vec2::ZERO);
-      
-    //other ui
-    turnLabel = LabelTTF::create("Turn 1", "Arial", 72);
-    pcLabel = LabelTTF::create("PC: 2", "Arial", 72);
-    plLabel = LabelTTF::create("PL: 0", "Arial", 72);
-    cfLabel = LabelTTF::create("CF: 0", "Arial", 72);
-    spLabel = LabelTTF::create("SP: 100", "Arial", 72);
-    
-    scoreLabel = LabelTTF::create("Score: 0", "Arial", 128);
-    billLabel = LabelTTF::create("No Bill", "Arial", 72);
-    
-    turnLabel->setColor(ccc3(0,0,0));
-    pcLabel->setColor(ccc3(0,0,0));
-    plLabel->setColor(ccc3(0,0,0));
-    cfLabel->setColor(ccc3(0,0,0));
-    spLabel->setColor(ccc3(0,0,0));
-    scoreLabel->setColor(ccc3(0,0,0));
-    billLabel->setColor(ccc3(0,0,0));
-    
-    int padding = 20;
-    
-    turnLabel->setPosition(Vec2(turnLabel->getContentSize().width, visibleSize.height - turnLabel->getContentSize().height));
-    pcLabel->setPosition(Vec2(turnLabel->getPosition().x + turnLabel->getContentSize().width + padding, visibleSize.height - turnLabel->getContentSize().height));
-    plLabel->setPosition(Vec2(pcLabel->getPosition().x + pcLabel->getContentSize().width + padding, visibleSize.height - turnLabel->getContentSize().height));
-    cfLabel->setPosition(Vec2(plLabel->getPosition().x + plLabel->getContentSize().width + padding, visibleSize.height - turnLabel->getContentSize().height));
-    
-    spLabel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height - turnLabel->getContentSize().height * 2));
-    
-    scoreLabel->setPosition(Vec2(visibleSize.width / 2, scoreLabel->getContentSize().height + padding));
-    billLabel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 4));
     
     //multi-menu system
     
-    //create all buttons
+    //button pool for creating menus
     
     auto mainOfficeButton = MenuItemImage::create(
                                             "btnGoToOffice.png",
@@ -176,48 +54,176 @@ bool GameScreen::init()
                                             CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
     mainOfficeButton->setTag(BTN_GO_TO_OFFICE);
     
-    auto allHillButton = MenuItemImage::create(
+    auto mainFloorButton = MenuItemImage::create(
+                                            "btnGoToFloor.png",
+                                            "btnGoToFloorPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    mainFloorButton->setTag(BTN_GO_TO_FLOOR);
+    
+    auto mainMCButton = MenuItemImage::create(
+                                            "btnGoToMC.png",
+                                            "btnGoToMCPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    mainMCButton->setTag(BTN_GO_TO_MC);
+    
+    auto floorHillButton = MenuItemImage::create(
                                             "btnGoToHill.png",
                                             "btnGoToHillPressed.png",
                                             CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
-    allHillButton->setTag(BTN_GO_TO_HILL);
+    floorHillButton->setTag(BTN_GO_TO_HILL_FLOOR);
     
-    //create menus
-    Vector<MenuItem* > tItems; 
+    auto hillNextTurnButton = MenuItemImage::create(
+                                            "btnNextTurn.png",
+                                            "btnNextTurnPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    hillNextTurnButton->setTag(BTN_NEXT_TURN);
+    
+    auto floorNewBillButton = MenuItemImage::create(
+                                            "btnNewBill.png",
+                                            "btnNewBillPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    floorNewBillButton->setTag(BTN_NEW_BILL);
+    
+    auto floorVoteButton = MenuItemImage::create(
+                                            "btnVote.png",
+                                            "btnVotePressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    floorVoteButton->setTag(BTN_VOTE);
+    
+    auto floorAmmendButton = MenuItemImage::create(
+                                            "btnAmmend.png",
+                                            "btnAmmendPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    floorAmmendButton->setTag(BTN_AMMEND);
+    
+    auto floorRiderButton = MenuItemImage::create(
+                                            "btnRider.png",
+                                            "btnRiderPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    floorRiderButton->setTag(BTN_RIDER);
+    
+    auto officeCampButton = MenuItemImage::create(
+                                            "btnCampaign.png",
+                                            "btnCampaignPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    officeCampButton->setTag(BTN_CAMPAIGN);
+    
+    auto officeInterviewButton = MenuItemImage::create(
+                                            "btnInterview.png",
+                                            "btnInterviewPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    officeInterviewButton->setTag(BTN_INTERVIEW);
+    
+    auto officeLobbyButton = MenuItemImage::create(
+                                            "btnLobby.png",
+                                            "btnLobbyPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    officeLobbyButton->setTag(BTN_LOBBY);
+    
+    auto officeHillButton = MenuItemImage::create(
+                                            "btnGoToHill.png",
+                                            "btnGoToHillPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    officeHillButton->setTag(BTN_GO_TO_HILL_OFFICE);
+    
+    auto MCHillButton = MenuItemImage::create(
+                                            "btnGoToHill.png",
+                                            "btnGoToHillPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    MCHillButton->setTag(BTN_GO_TO_HILL_MC);
+    
+    auto MCFundButton = MenuItemImage::create(
+                                            "btnFundraise.png",
+                                            "btnFundraisePressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    MCFundButton->setTag(BTN_FUNDRAISE);
+    
+    auto MCSoapButton = MenuItemImage::create(
+                                            "btnSoap.png",
+                                            "btnSoapPressed.png",
+                                            CC_CALLBACK_1(GameScreen::menuSelectCallback, this));
+    MCSoapButton->setTag(BTN_SOAPBOX);
+    
+    //create menus - hill menu
+    Vector<MenuItem* > tItems;
+    tItems.pushBack(mainMCButton);
     tItems.pushBack(mainOfficeButton);
+    tItems.pushBack(mainFloorButton);
+    tItems.pushBack(hillNextTurnButton);
     
     mainMenu = Menu::createWithArray(tItems);
     mainMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    mainMenu->alignItemsVerticallyWithPadding(40);
     
+    //office menu
     tItems.clear();
-    tItems.pushBack(allHillButton);
+    tItems.pushBack(officeCampButton);
+    tItems.pushBack(officeInterviewButton);
+    tItems.pushBack(officeLobbyButton);
+    tItems.pushBack(officeHillButton);
     
     officeMenu = Menu::createWithArray(tItems);
     officeMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    officeMenu->alignItemsVerticallyWithPadding(40);
     
+    //floor menu
     tItems.clear();
+    tItems.pushBack(floorNewBillButton);
+    tItems.pushBack(floorAmmendButton);
+    tItems.pushBack(floorRiderButton);
+    tItems.pushBack(floorVoteButton);
+    tItems.pushBack(floorHillButton);
     
+    floorMenu = Menu::createWithArray(tItems);
+    floorMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 100));
+    floorMenu->alignItemsVerticallyWithPadding(40);
+    
+    //media center menu
+    tItems.clear();
+    tItems.pushBack(MCFundButton);
+    tItems.pushBack(MCSoapButton);
+    tItems.pushBack(MCHillButton);
+    
+    MCMenu = Menu::createWithArray(tItems);
+    MCMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    MCMenu->alignItemsVerticallyWithPadding(40);
     
     //manually retain to avoid nasty cpp error.
     mainMenu->retain();
     officeMenu->retain();
+    floorMenu->retain();
+    MCMenu->retain();
     
     
+    //status labels
+    cocos2d::Sprite* topBar = Sprite::create("bgHead.png");
+    
+    topBar->setScaleX(visibleSize.width);
+    topBar->setScaleY(visibleSize.height / 64);
+    topBar->setPosition(Vec2(0, visibleSize.height - topBar->getContentSize().height));
+    
+    statusLabel = LabelTTF::create("Turn: 1  PC: 0  PL: 0  CF: 0  SP: 100", "Arial", 64);
+    //statusLabel->setAlignment(TextHAlignment::CENTER);
+    statusLabel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height - statusLabel->getContentSize().height));
+    
+    cocos2d::Sprite* bottomBar = Sprite::create("bgHead.png");
+    bottomBar->setScaleX(visibleSize.width);
+    bottomBar->setScaleY(visibleSize.height / 72);
+    bottomBar->setPosition(Vec2(0, topBar->getContentSize().height));
+    
+    billLabel = LabelTTF::create("No Bill", "Arial", 72);
+    billLabel->setPosition(Vec2(visibleSize.width / 2, billLabel->getContentSize().height));
+    
+    
+        
     
     //add layout to screen
     this->addChild(bg, -1);
     this->addChild(mainMenu, 1);
-    
-    //this->addChild(menu, 1);
-    //this->addChild(rightMenu, 1);
-    //this->addChild(turnLabel, 2);
-    //this->addChild(pcLabel, 2);
-    //this->addChild(plLabel, 2);
-    //this->addChild(cfLabel, 2);
-    //this->addChild(spLabel, 2);
-    //this->addChild(scoreLabel, 2);
-    //this->addChild(billLabel, 2);
-    
+    this->addChild(topBar, 1);
+    this->addChild(statusLabel, 2);
+    this->addChild(bottomBar, 1);
+    this->addChild(billLabel, 2);
     
 }
 
@@ -231,6 +237,11 @@ void GameScreen::changeBackgrounds(GameScreen::MenuType type)
         case GameScreen::MenuType::OFFICE:
             bg->setTexture(TextureCache::sharedTextureCache()->addImage("bgOfficeUHD.png"));
             break;
+        case GameScreen::MenuType::FLOOR:
+            bg->setTexture(TextureCache::sharedTextureCache()->addImage("bgFloorUHD.png"));
+        case GameScreen::MenuType::MEDIA:
+            bg->setTexture(TextureCache::sharedTextureCache()->addImage("bgMediaUHD.png"));
+            break;
         default:
             break;
     }
@@ -242,11 +253,21 @@ void GameScreen::changeMenu(GameScreen::MenuType type)
     {
         case GameScreen::MenuType::MAIN:
             this->removeChild(officeMenu, false);
+            this->removeChild(floorMenu, false);
+            this->removeChild(MCMenu, false);
             this->addChild(mainMenu, 1);
             break;
         case GameScreen::MenuType::OFFICE:
             this->removeChild(mainMenu, false);
             this->addChild(officeMenu, 1);
+            break;
+        case GameScreen::MenuType::FLOOR:
+            this->removeChild(mainMenu, false);
+            this->addChild(floorMenu, 1);
+            break;
+        case GameScreen::MenuType::MEDIA:
+            this->removeChild(mainMenu, false);
+            this->addChild(MCMenu, 1);
             break;
     }
     
@@ -262,9 +283,25 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
         case BTN_GO_TO_OFFICE:
             this->changeMenu(GameScreen::MenuType::OFFICE);
             break;
-        
-        case BTN_GO_TO_HILL:
+        case BTN_GO_TO_HILL_OFFICE:
             this->changeMenu(GameScreen::MenuType::MAIN);
+            break;
+        case BTN_GO_TO_HILL_MC:
+            this->changeMenu(GameScreen::MenuType::MAIN);
+            break;
+        case BTN_GO_TO_HILL_FLOOR:
+            this->changeMenu(GameScreen::MenuType::MAIN);
+            break;
+        case BTN_GO_TO_FLOOR:
+            this->changeMenu(GameScreen::MenuType::FLOOR);
+            break;
+        case BTN_NEXT_TURN:
+            
+            break;
+        
+        
+        case BTN_GO_TO_MC:
+            this->changeMenu(GameScreen::MenuType::MEDIA);
             break;
     }
     
@@ -382,61 +419,7 @@ void GameScreen::updateUI()
     //nothing is easy in c++.
     std::ostringstream parser;
     
-    parser << "Turn " << turn;
-    turnLabel->setString(parser.str());
     
-    parser.str(std::string());
-    parser.clear();
-    
-    parser << "PC: " << pc;
-    pcLabel->setString(parser.str());
-    
-    parser.str(std::string());
-    parser.clear();
-    
-    parser << "PL: " << pl;
-    plLabel->setString(parser.str());
-    
-    parser.str(std::string());
-    parser.clear();
-    
-    parser << "CF: " << cf;
-    cfLabel->setString(parser.str());
-    
-    parser.str(std::string());
-    parser.clear();
-    
-    parser << "SP: " << support;
-    spLabel->setString(parser.str());
-
-    //special case for SP, change font color if below 20.
-    if (support <= 20)
-    {
-        spLabel->setColor(ccc3(200,0,0));
-    }
-    else
-    {
-        spLabel->setColor(ccc3(0,0,0));
-    }
-    
-    parser.str(std::string());
-    parser.clear();
-    
-    parser << "Score: " << score;
-    scoreLabel->setString(parser.str());
-    
-    parser.str(std::string());
-    parser.clear();
-    
-    if (doesBillExist())
-    {
-        parser << "Bill - Appeal: " << curBill->appeal << " Wording: " << curBill->wording;
-        billLabel->setString(parser.str());
-    }
-    else
-    {
-        billLabel->setString("No Bill");
-    }
 }
 
 bool GameScreen::doesBillExist()

@@ -133,9 +133,9 @@ target_link_libraries(${APP_NAME}
   spine
   cocostudio
   cocosbuilder
-  extensions
   audio
   cocos2d
+  extensions
   )
 
 set(APP_BIN_DIR "${CMAKE_BINARY_DIR}/bin")

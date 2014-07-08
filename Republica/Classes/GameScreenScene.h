@@ -21,7 +21,21 @@ class GameScreen : public cocos2d::Layer
     public:
         //button constants
         static const int BTN_GO_TO_OFFICE = 10;
-        static const int BTN_GO_TO_HILL = 11;
+        static const int BTN_GO_TO_HILL_OFFICE = 11;
+        static const int BTN_GO_TO_HILL_MC = 12;
+        static const int BTN_GO_TO_HILL_FLOOR = 13;
+        static const int BTN_GO_TO_FLOOR = 14;
+        static const int BTN_NEXT_TURN = 15;
+        static const int BTN_NEW_BILL = 16;
+        static const int BTN_VOTE = 17;
+        static const int BTN_AMMEND = 18;
+        static const int BTN_RIDER = 19;
+        static const int BTN_CAMPAIGN = 20;
+        static const int BTN_INTERVIEW = 21;
+        static const int BTN_LOBBY = 22;
+        static const int BTN_GO_TO_MC = 23;
+        static const int BTN_FUNDRAISE = 24;
+        static const int BTN_SOAPBOX = 25;
         
         //structs
         
@@ -31,26 +45,20 @@ class GameScreen : public cocos2d::Layer
             int wording;
         };
         //enums
-        enum class MenuType { MAIN, OFFICE, HILL};
+        enum class MenuType { MAIN, OFFICE, FLOOR, MEDIA};
         
         //member variables
         cocos2d::Sprite* bg;
-        cocos2d::Menu* menu;
-        cocos2d::Vector<cocos2d::MenuItem *> menuItems;
-        
-        cocos2d::Sprite* bgStatusBar;
-        cocos2d::LabelTTF* turnLabel;
-        cocos2d::LabelTTF* pcLabel;
-        cocos2d::LabelTTF* plLabel;
-        cocos2d::LabelTTF* cfLabel;
-        cocos2d::LabelTTF* spLabel;
-        cocos2d::LabelTTF* scoreLabel;
-        cocos2d::LabelTTF* billLabel;
-        
+                
         //menus
         cocos2d::Menu* mainMenu;
         cocos2d::Menu* floorMenu;
         cocos2d::Menu* officeMenu;
+        cocos2d::Menu* MCMenu;
+        
+        //label ui
+        cocos2d::LabelTTF* statusLabel;
+        cocos2d::LabelTTF* billLabel;
         
         int turn = 1;
         int score = 0;
