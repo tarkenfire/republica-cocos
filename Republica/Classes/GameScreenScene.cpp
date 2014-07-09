@@ -239,6 +239,7 @@ void GameScreen::changeBackgrounds(GameScreen::MenuType type)
             break;
         case GameScreen::MenuType::FLOOR:
             bg->setTexture(TextureCache::sharedTextureCache()->addImage("bgFloorUHD.png"));
+            break;
         case GameScreen::MenuType::MEDIA:
             bg->setTexture(TextureCache::sharedTextureCache()->addImage("bgMediaUHD.png"));
             break;
@@ -295,17 +296,149 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
         case BTN_GO_TO_FLOOR:
             this->changeMenu(GameScreen::MenuType::FLOOR);
             break;
-        case BTN_NEXT_TURN:
-            
-            break;
-        
-        
         case BTN_GO_TO_MC:
             this->changeMenu(GameScreen::MenuType::MEDIA);
             break;
+        
+        case BTN_NEW_BILL:
+            if (!doesBillExist())
+            {
+                createBill();
+            }
+            else
+            {
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            
+            break;
+        case BTN_AMMEND:
+            if (doesBillExist())
+            {
+                if (pl > 0)
+                {
+                    curBill->appeal++;
+                    pl--;
+                    MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                }
+                else
+                {
+                    MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                }
+            }
+            else
+            {
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            
+            break;
+        
+        case BTN_RIDER:
+             if (doesBillExist())
+            {
+                if (pl > 0)
+                {
+                    pl--;
+                    int ridResult = getRandomIntInRange(0,5);
+                    curBill->appeal+= ridResult;
+                    
+                    MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                }
+                else
+                {
+                    MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                }
+            }
+            else
+            {
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            
+            break;
+        
+        case BTN_VOTE:
+            passBill();
+            break;
+        
+        case BTN_CAMPAIGN:
+            if (cf > 0)
+            {
+                cf--;
+                support++;
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            else
+            {
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            break;
+        
+        case BTN_INTERVIEW:
+            if (cf > 0)
+            {
+                cf--;
+                int interResult = getRandomIntInRange(0, 5);
+                support+= interResult;
+                
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            else
+            {
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            break;
+        
+        case BTN_LOBBY:
+            if (cf > 1)
+            {
+                cf-=2;
+                
+                flag_decay_frozen = true;
+                freezeCounter = getRandomIntInRange(3, 5);
+                
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            else
+            {
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");   
+            }
+            
+            break;
+    
+        case BTN_NEXT_TURN:
+            onNextTurn();
+            break;
+        
+        case BTN_FUNDRAISE:
+            if (pc > 0)
+            {
+                pc--;
+                cf++;
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            else
+            {
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            break;
+        
+        case BTN_SOAPBOX:
+            if (pc > 0)
+            {
+                pc--;
+                pl++;
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            else
+            {
+                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+            }
+            break;
+        
+        
+        
     }
     
-    //updateUI();
+    updateUI();
 }
 
 void GameScreen::onGameEnd()
@@ -355,20 +488,14 @@ void GameScreen::createBill()
 {
     curBill = new Bill();
     curBill->appeal = 20;
-    curBill->wording = 1;
 }
 
 
 
 void GameScreen::passBill()
-{
-    //roll a d100 - in the annoying C++ way.
-    std::random_device rd; //rand generator
-    std::mt19937 eng(rd()); //seed the generator
-    std::uniform_int_distribution<> pRange(0, 100); //range
-    
+{    
     //if base + appeal >= 70, bill passes, gain score += wording
-    int base = pRange(eng);
+    int base = getRandomIntInRange(0,100);
     
     std::ostringstream parser;
     parser << "Base Role " << base << " Appeal: " << curBill->appeal
@@ -419,7 +546,36 @@ void GameScreen::updateUI()
     //nothing is easy in c++.
     std::ostringstream parser;
     
+    //update top status bar
+    parser << "Turn: " << turn << "  PC: " << pc << "  PL: " <<
+        pl << "  CF: " << cf << "  SP: " << support;
+        
+    statusLabel->setString(parser.str());
     
+    parser.str(std::string());
+    parser.clear();
+    
+    //update bottom status bar
+    if (doesBillExist())
+    {
+        parser << "Current Bill - Appeal: " << curBill->appeal;
+        billLabel->setString(parser.str());
+    }
+    else
+    {
+        billLabel->setString("No Bill");
+    }
+    
+    
+}
+
+int GameScreen::getRandomIntInRange(int min, int max)
+{
+    std::random_device rd; //rand generator
+    std::mt19937 eng(rd()); //seed the generator
+    std::uniform_int_distribution<> pRange(min, max); //range
+    
+    return pRange(eng);
 }
 
 bool GameScreen::doesBillExist()

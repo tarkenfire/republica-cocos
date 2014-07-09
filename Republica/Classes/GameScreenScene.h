@@ -70,6 +70,9 @@ class GameScreen : public cocos2d::Layer
         
         Bill* curBill = nullptr;
         
+        bool flag_decay_frozen = false;
+        int freezeCounter = 0;
+        
         
         //member methods
         static cocos2d::Scene* createScene();
@@ -86,6 +89,9 @@ class GameScreen : public cocos2d::Layer
         void onGameEnd();
         
         void updateUI();
+        
+        //utility
+        int getRandomIntInRange(int min, int max);
         
         
         //callbacks
