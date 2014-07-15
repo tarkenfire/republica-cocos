@@ -313,7 +313,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/AchScreenScene.o: \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h \
  jni/../../Classes/SplashScreenScene.h \
  jni/../../Classes/GameScreenScene.h \
- jni/../../Classes/LeaderboardScreenScene.h
+ jni/../../Classes/LeaderboardScreenScene.h \
+ jni/../../Classes/ModalDialog.h
 
 jni/../../Classes/AchScreenScene.h:
 
@@ -944,3 +945,5 @@ jni/../../Classes/SplashScreenScene.h:
 jni/../../Classes/GameScreenScene.h:
 
 jni/../../Classes/LeaderboardScreenScene.h:
+
+jni/../../Classes/ModalDialog.h:

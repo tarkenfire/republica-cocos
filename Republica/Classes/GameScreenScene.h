@@ -10,6 +10,7 @@
 
 #include "cocos2d.h"
 #include "LeaderboardScreenScene.h"
+#include "ModalDialog.h"
 
 class GameScreen : public cocos2d::Layer
 {
@@ -59,6 +60,8 @@ class GameScreen : public cocos2d::Layer
         //label ui
         cocos2d::LabelTTF* statusLabel;
         cocos2d::LabelTTF* billLabel;
+        
+        //ModalDialog* dialog;
         
         int turn = 1;
         int score = 0;

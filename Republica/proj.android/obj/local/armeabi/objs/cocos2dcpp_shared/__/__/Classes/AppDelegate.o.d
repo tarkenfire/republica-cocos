@@ -314,7 +314,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/AppDelegate.o: \
  jni/../../Classes/HelloWorldScene.h \
  jni/../../Classes/SplashScreenScene.h \
  jni/../../Classes/GameScreenScene.h \
- jni/../../Classes/LeaderboardScreenScene.h
+ jni/../../Classes/LeaderboardScreenScene.h \
+ jni/../../Classes/ModalDialog.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -947,3 +948,5 @@ jni/../../Classes/SplashScreenScene.h:
 jni/../../Classes/GameScreenScene.h:
 
 jni/../../Classes/LeaderboardScreenScene.h:
+
+jni/../../Classes/ModalDialog.h:

@@ -215,7 +215,9 @@ bool GameScreen::init()
     billLabel->setPosition(Vec2(visibleSize.width / 2, billLabel->getContentSize().height));
     
     
-        
+    auto dialog = ModalDialog::create();
+    dialog->configDialog(ModalDialog::DialogType::CONFIRM, "Hi", "Hi");
+    
     
     //add layout to screen
     this->addChild(bg, -1);
@@ -224,7 +226,7 @@ bool GameScreen::init()
     this->addChild(statusLabel, 2);
     this->addChild(bottomBar, 1);
     this->addChild(billLabel, 2);
-    
+    this->addChild(dialog, 5);
 }
 
 void GameScreen::changeBackgrounds(GameScreen::MenuType type)
@@ -582,3 +584,5 @@ bool GameScreen::doesBillExist()
 {
     return !(curBill == nullptr);
 }
+
+
