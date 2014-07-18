@@ -202,7 +202,7 @@ bool GameScreen::init()
     topBar->setScaleY(visibleSize.height / 64);
     topBar->setPosition(Vec2(0, visibleSize.height - topBar->getContentSize().height));
     
-    statusLabel = LabelTTF::create("Turn: 1  PC: 0  PL: 0  CF: 0  SP: 100", "Arial", 64);
+    statusLabel = LabelTTF::create("Turn: 1  PC: 2  PL: 0  CF: 0  SP: 100", "Arial", 64);
     //statusLabel->setAlignment(TextHAlignment::CENTER);
     statusLabel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height - statusLabel->getContentSize().height));
     
@@ -226,7 +226,8 @@ bool GameScreen::init()
     this->addChild(statusLabel, 2);
     this->addChild(bottomBar, 1);
     this->addChild(billLabel, 2);
-    this->addChild(dialog, 5);
+    
+    //this->addChild(dialog, 5);
 }
 
 void GameScreen::changeBackgrounds(GameScreen::MenuType type)
@@ -309,7 +310,7 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
             }
             else
             {
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("There is a bill already created. Only one bill can be created at a time.", "Exisiting Bill");
             }
             
             break;
@@ -320,22 +321,22 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
                 {
                     curBill->appeal++;
                     pl--;
-                    MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                    MessageBox("You add an ammendment to the bill, increasing it's appeal by 1", "Ammendment");
                 }
                 else
                 {
-                    MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                    MessageBox("You need more PL to do this. PL can be converted in the Media Center.", "Not Enough PL");
                 }
             }
             else
             {
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("There is no bill to ammend. Create a bill first.", "No Bill");
             }
             
             break;
         
         case BTN_RIDER:
-             if (doesBillExist())
+            if (doesBillExist())
             {
                 if (pl > 0)
                 {
@@ -343,22 +344,44 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
                     int ridResult = getRandomIntInRange(0,5);
                     curBill->appeal+= ridResult;
                     
-                    MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                    std::ostringstream parser;
+                    parser << "You introduce a controversial rider to the bill, hoping for a large increase in appeal. ";
+                    
+                    if (ridResult == 0)
+                    {
+                        parser << "The plan fails. Bill appeal remains the same.";
+                    }
+                    else // >0
+                    {
+                        parser << "The plan is a success, bill appeal increases by " << ridResult;
+                    }
+                    
+                    std::string holder = parser.str();
+                    const char* p = holder.c_str();
+                    
+                    MessageBox(p, "Rider");
                 }
                 else
                 {
-                    MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                    MessageBox("You need more PL to do this. PL can be converted in the Media Center.", "Not Enough PL");
                 }
             }
             else
             {
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                 MessageBox("There is no bill to add a rider to. Create a bill first.", "No Bill");
             }
             
             break;
         
         case BTN_VOTE:
-            passBill();
+            if (doesBillExist())
+            {
+                passBill();
+            }
+            else
+            {
+                MessageBox("There is no bill to vote on. Create a bill first.", "No Bill");
+            }
             break;
         
         case BTN_CAMPAIGN:
@@ -366,11 +389,11 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
             {
                 cf--;
                 support++;
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("You make a few campaign speeches and gain a bit of support. SP increased by 1.", "Campaign");
             }
             else
             {
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("You need more CF to do this. CF can be converted in the Media Center.", "Not Enough PL");
             }
             break;
         
@@ -381,7 +404,24 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
                 int interResult = getRandomIntInRange(0, 5);
                 support+= interResult;
                 
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                std::ostringstream parser;
+                parser << "You have an interview with a controversial pundit, hoping for a large increase in support. ";
+                
+                if (interResult == 0)
+                {
+                    parser << "The plan fails. Support remains the same.";
+                }
+                else // >0
+                {
+                    parser << "The plan is a success, support increases by " << interResult << ".";
+                }
+                
+                std::string holder = parser.str();
+                const char* p = holder.c_str();
+                
+                
+                
+                MessageBox(p, "Interview");
             }
             else
             {
@@ -392,16 +432,16 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
         case BTN_LOBBY:
             if (cf > 1)
             {
-                cf-=2;
+                //cf-=2;
                 
                 flag_decay_frozen = true;
                 freezeCounter = getRandomIntInRange(3, 5);
                 
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("Feature not implemented. CF is not charged.", "IMPLEMENT");
             }
             else
             {
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");   
+                MessageBox("Feature not implemented. CF is not charged.", "IMPLEMENT");   
             }
             
             break;
@@ -415,11 +455,11 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
             {
                 pc--;
                 cf++;
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("You hold a fancy fundraiser, gaining some campaign funds. CF increased by 1.", "Fundraiser");
             }
             else
             {
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("You do not have enough PC to do this.", "Not Enough PC");
             }
             break;
         
@@ -428,16 +468,13 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
             {
                 pc--;
                 pl++;
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("You make an impassioned speech about a popular issue. Your peers are impressed. PL increased by 1.", "Soapbox");
             }
             else
             {
-                MessageBox("IMPLEMENT ME", "IMPLEMENT");
+                MessageBox("You do not have enough PC to do this.", "Not Enough PC");
             }
             break;
-        
-        
-        
     }
     
     updateUI();
@@ -477,6 +514,371 @@ void GameScreen::onNextTurn()
     {
         curBill->appeal--;
     }
+    //standard "events" that always happen.
+    MessageBox("PL increases by 2. Appeals decrease by 1.","New Turn Report");
+    
+    
+    //check for the end of bonuses
+    if (bonusActive)
+    {
+        if (--bonusCounter = 0)
+        {
+            bonusActive = false;
+            cfMod = 0;
+            plMod = 0;
+            
+            MessageBox("Bonus/Penalty Ended.", "Event");
+        }
+        else
+        {
+            pl+= plMod;
+            cf+= cfMod;
+            
+            if (pl < 0) pl = 0;
+            if (cf < 0) cf = 0;
+        }
+        
+        updateUI();
+    }
+    
+    //check for random events 
+    std::ostringstream parser;
+    
+    parser << "";
+    
+    
+    //up/down d10 roll, 1-5 = roll on "good event" table, 6-10 = roll on "bad event" table;
+    int roll = getRandomIntInRange(1, 10);
+    int innerRoll = getRandomIntInRange(0,100);
+    int tabRoll = getRandomIntInRange(1,5);
+    bool eventHappens = true;
+    
+
+    // 0-65 = Nothing happens
+    // 65-75 = "minor" good or bad event
+    // 75-85 = "moderate" good or bad event
+    // 85+ = "massive" good or bad event
+    if (roll <= 5) //good "table"
+    {    
+        MessageBox("In GOOD","DEBUG");
+        
+        //there's no "ranged" switches in C++, need to nest ifs
+        if (0 < innerRoll && innerRoll <= 65)
+        {
+            MessageBox("0-65","DEBUG");
+            eventHappens = false;
+        }
+        else if (66 < innerRoll && innerRoll <= 75)
+        {
+            MessageBox("66-75","DEBUG");
+            int tabRoll = getRandomIntInRange(1, 5);
+            switch (tabRoll)
+            {
+                case 1: //pl event - static
+                    parser << "You have lunch with fellow lawmakers and make in-roads with several of them. PL increased by 1";
+                    pl++;
+                    break;
+                case 2: //pl event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You gain 1 PL every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        plMod = 1;
+                    }
+                    break;
+                case 3: //cf event - static
+                    parser <<"ADD FLAVOR TEXT. You gain 1 CF";
+                    cf++;
+                    break;
+                case 4: //cf event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You gain 1 CF every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        cfMod = 1;
+                    }
+                    break;
+                case 5: // support event
+                    parser << "ADD FLAVOR TEXT. You gain 2 SP.";
+                    support+=2;
+                    break;
+            }
+        }
+        else if (76 < innerRoll && innerRoll <= 85)
+        {
+            MessageBox("76-85","DEBUG");
+            int tabRoll = getRandomIntInRange(1,5);
+            switch (tabRoll)
+            {
+                case 1: //pl event - static
+                    parser << "You have lunch with fellow lawmakers and make in-roads with several of them. PL increased by 2";
+                    pl+=2;
+                    break;
+                case 2: //pl event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You gain 2 PL every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        plMod = 2;
+                    }
+                    break;
+                case 3: //cf event - static
+                    parser << "ADD FLAVOR TEXT. You gain 2 CF";
+                    cf+=2;
+                    break;
+                case 4: //cf event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser <<"ADD FLAVOR TEXT. You gain 2 CF every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        cfMod = 2;
+                    }
+                    break;
+                case 5: // support event
+                    parser << "ADD FLAVOR TEXT. You gain 5 SP.";
+                    support+=5;
+                    break;
+            }
+        }
+        else // >85
+        {
+            MessageBox("85+","DEBUG");
+            int tabRoll = getRandomIntInRange(1,5);
+            switch (tabRoll)
+            {
+                case 1: //pl event - static
+                    parser << "You have lunch with fellow lawmakers and make in-roads with several of them. PL increased by 3";
+                    pl+=3;
+                    break;
+                case 2: //pl event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You gain 3 PL every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        plMod = 3;
+                    }
+                    break;
+                case 3: //cf event - static
+                    parser << "ADD FLAVOR TEXT. You gain 3 CF";
+                    cf+=3;
+                    break;
+                case 4: //cf event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You gain 3 CF every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        cfMod = 3;
+                    }
+                    break;
+                case 5: // support event
+                    parser << "ADD FLAVOR TEXT. You gain 10 SP.";
+                    support+=10;
+                    break;
+            }
+        }
+    }
+    else //bad "table"
+    {
+        
+        //there's no "ranged" switches in C++, need to nest ifs
+        
+        MessageBox("In BAD","DEBUG");
+        if (0 < innerRoll && innerRoll <= 65)
+        {
+            eventHappens = false;
+        }
+        else if (66 < innerRoll && innerRoll <= 75)
+        {
+            
+            int tabRoll = getRandomIntInRange(1,5);
+            
+            switch (tabRoll)
+            {
+                case 1: //pl event - static
+                    parser << "ADD FLAVOR TEXT. PL decreased by 1";
+                    if (pl > 0) pl--;
+                    break;
+                case 2: //pl event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You lose 1 PL every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        plMod = -1;
+                    }
+                    break;
+                case 3: //cf event - static
+                    parser << "ADD FLAVOR TEXT. You lose 1 CF";
+                    if (cf > 0) cf--;
+                    break;
+                case 4: //cf event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser <<"ADD FLAVOR TEXT. You lose 1 CF every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        cfMod = -1;
+                    }
+                    break;
+                case 5: // support event
+                    parser << "ADD FLAVOR TEXT. You lose 2 SP.";
+                    if (support - 2 > 1) support-=2;
+                    break;
+            }
+        }
+        else if (76 < innerRoll && innerRoll <= 85)
+        {
+            
+            
+            switch (tabRoll)
+            {
+                case 1: //pl event - static
+                    parser << "ADD FLAVOR TEXT. PL decreased by 1";
+                    if (pl-=2 < 0) pl = 0;
+                    break;
+                case 2: //pl event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You lose 2 PL every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        plMod = -2;
+                    }
+                    break;
+                case 3: //cf event - static
+                    parser << "ADD FLAVOR TEXT. You lose 2 CF";
+                    if (cf -= 2 < 0) cf = 0;
+                    break;
+                case 4: //cf event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You lose 2 CF every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        cfMod = -2;
+                    }
+                    break;
+                case 5: // support event
+                    parser << "ADD FLAVOR TEXT. You lose 5 SP.";
+                    if (support - 5 > 1) support-=5;
+                    break;
+            }
+        }
+        else // >85
+        {
+            
+            switch (tabRoll)
+            {
+                case 1: //pl event - static
+                    parser << "ADD FLAVOR TEXT. PL decreased by 3";
+                    if (pl -= 3 < 0) pl = 0;
+                    break;
+                case 2: //pl event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You lose 3 PL every turn for 3 turns."; 
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        plMod = -3;
+                    }
+                    break;
+                case 3: //cf event - static
+                    parser << "ADD FLAVOR TEXT. You lose 3 CF";
+                    if (cf-=3 < 0) cf = 0;
+                    break;
+                case 4: //cf event - dynamic
+                    if (bonusActive)
+                    {
+                        //do nothing
+                        eventHappens = false;
+                    }
+                    else
+                    {
+                        parser << "ADD FLAVOR TEXT. You lose 3 CF every turn for 3 turns.";
+                        bonusActive = true;
+                        bonusCounter = 3;
+                        cfMod = -3;
+                    }
+                    break;
+                case 5: // support event
+                    parser << "ADD FLAVOR TEXT. You lose 10 SP.";
+                    if (support - 10 > 1) support-=10;
+                    break;
+            }
+        }
+    }
+    
+    if (eventHappens)
+    {
+        updateUI();
+    }
+    
+    std::string holder = parser.str();
+    const char* p = holder.c_str();
+    
+    MessageBox(p ,"Events");
+    
     
     //check for game end conditions.
     
@@ -505,7 +907,7 @@ void GameScreen::passBill()
     
     if(base + curBill->appeal >= 70)
     {
-        parser << " Bill Passes. Score of " << curBill->wording << " is awarded.";
+        parser << " Bill Passes.";
         score += curBill->wording;
         billsPassed++;
         
@@ -529,7 +931,7 @@ void GameScreen::passBill()
     }
     else
     {
-        parser << " Bill fails. No score awarded.";
+        parser << " Bill fails.";
     }
     
     
@@ -584,5 +986,3 @@ bool GameScreen::doesBillExist()
 {
     return !(curBill == nullptr);
 }
-
-

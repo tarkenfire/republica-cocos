@@ -16,6 +16,7 @@ class ModalDialog : public cocos2d::LayerColor
     public:
         enum class DialogType { CONFIRM, YESNO};
         
+        cocos2d::Sprite* modalBG;
         
         virtual bool init();
         CREATE_FUNC(ModalDialog);

@@ -76,6 +76,11 @@ class GameScreen : public cocos2d::Layer
         bool flag_decay_frozen = false;
         int freezeCounter = 0;
         
+        bool bonusActive = false;
+        int bonusCounter = 0;
+        
+        int cfMod = 0;
+        int plMod = 0;    
         
         //member methods
         static cocos2d::Scene* createScene();
