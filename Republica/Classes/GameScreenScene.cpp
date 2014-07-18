@@ -515,13 +515,14 @@ void GameScreen::onNextTurn()
         curBill->appeal--;
     }
     //standard "events" that always happen.
-    MessageBox("PL increases by 2. Appeals decrease by 1.","New Turn Report");
+    MessageBox("PC increases by 2. Appeals decrease by 1.","New Turn Report");
     
     
     //check for the end of bonuses
     if (bonusActive)
     {
-        if (--bonusCounter = 0)
+        bonusCounter--;
+        if (bonusCounter == 0)
         {
             bonusActive = false;
             cfMod = 0;
@@ -560,22 +561,17 @@ void GameScreen::onNextTurn()
     // 85+ = "massive" good or bad event
     if (roll <= 5) //good "table"
     {    
-        MessageBox("In GOOD","DEBUG");
-        
         //there's no "ranged" switches in C++, need to nest ifs
         if (0 < innerRoll && innerRoll <= 65)
         {
-            MessageBox("0-65","DEBUG");
             eventHappens = false;
         }
         else if (66 < innerRoll && innerRoll <= 75)
         {
-            MessageBox("66-75","DEBUG");
-            int tabRoll = getRandomIntInRange(1, 5);
             switch (tabRoll)
             {
                 case 1: //pl event - static
-                    parser << "You have lunch with fellow lawmakers and make in-roads with several of them. PL increased by 1";
+                    parser << "You have lunch with fellow lawmakers and make in-roads with several of them. PL increased by 1.";
                     pl++;
                     break;
                 case 2: //pl event - dynamic
@@ -586,14 +582,14 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You gain 1 PL every turn for 3 turns.";
+                        parser << "You give an interview supporting the bill of a fellow lawmaker. You gain 1 PL every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         plMod = 1;
                     }
                     break;
                 case 3: //cf event - static
-                    parser <<"ADD FLAVOR TEXT. You gain 1 CF";
+                    parser <<"You get a modest donation from a supporter. You gain 1 CF";
                     cf++;
                     break;
                 case 4: //cf event - dynamic
@@ -604,26 +600,24 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You gain 1 CF every turn for 3 turns.";
+                        parser << "A small group of supporters set up a fundraising campaign. You gain 1 CF every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         cfMod = 1;
                     }
                     break;
                 case 5: // support event
-                    parser << "ADD FLAVOR TEXT. You gain 2 SP.";
+                    parser << "You wear a nifty comical tie during an interview and people like it. You gain 2 SP.";
                     support+=2;
                     break;
             }
         }
         else if (76 < innerRoll && innerRoll <= 85)
         {
-            MessageBox("76-85","DEBUG");
-            int tabRoll = getRandomIntInRange(1,5);
             switch (tabRoll)
             {
                 case 1: //pl event - static
-                    parser << "You have lunch with fellow lawmakers and make in-roads with several of them. PL increased by 2";
+                    parser << "You vote in favor of a bill by a fellow lawmaker to curry favor. PL increased by 2.";
                     pl+=2;
                     break;
                 case 2: //pl event - dynamic
@@ -634,14 +628,14 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You gain 2 PL every turn for 3 turns.";
+                        parser << "You give a speech extolling the virtues of your party over the opposition. You gain 2 PL every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         plMod = 2;
                     }
                     break;
                 case 3: //cf event - static
-                    parser << "ADD FLAVOR TEXT. You gain 2 CF";
+                    parser << "You get a donation from a corperate sponsor. You gain 2 CF.";
                     cf+=2;
                     break;
                 case 4: //cf event - dynamic
@@ -652,26 +646,24 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser <<"ADD FLAVOR TEXT. You gain 2 CF every turn for 3 turns.";
+                        parser <<"A large group of supporters start a fundraising campaign. You gain 2 CF every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         cfMod = 2;
                     }
                     break;
                 case 5: // support event
-                    parser << "ADD FLAVOR TEXT. You gain 5 SP.";
+                    parser << "You make a personal donation to your party's election council. You gain 5 SP.";
                     support+=5;
                     break;
             }
         }
         else // >85
         {
-            MessageBox("85+","DEBUG");
-            int tabRoll = getRandomIntInRange(1,5);
             switch (tabRoll)
             {
                 case 1: //pl event - static
-                    parser << "You have lunch with fellow lawmakers and make in-roads with several of them. PL increased by 3";
+                    parser << "You hold a large luncheon for fellow lawmakers. PL increased by 3.";
                     pl+=3;
                     break;
                 case 2: //pl event - dynamic
@@ -682,14 +674,14 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You gain 3 PL every turn for 3 turns.";
+                        parser << "You help whip up votes for a fellow lawmaker's bill. You gain 3 PL every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         plMod = 3;
                     }
                     break;
                 case 3: //cf event - static
-                    parser << "ADD FLAVOR TEXT. You gain 3 CF";
+                    parser << "Your party's election council donates campaign funds to you. You gain 3 CF.";
                     cf+=3;
                     break;
                 case 4: //cf event - dynamic
@@ -700,14 +692,14 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You gain 3 CF every turn for 3 turns.";
+                        parser << "A Super-PAC is set up in support of you. You gain 3 CF every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         cfMod = 3;
                     }
                     break;
                 case 5: // support event
-                    parser << "ADD FLAVOR TEXT. You gain 10 SP.";
+                    parser << "You cast the deciding vote on an important bill. You gain 10 SP.";
                     support+=10;
                     break;
             }
@@ -717,21 +709,16 @@ void GameScreen::onNextTurn()
     {
         
         //there's no "ranged" switches in C++, need to nest ifs
-        
-        MessageBox("In BAD","DEBUG");
         if (0 < innerRoll && innerRoll <= 65)
         {
             eventHappens = false;
         }
         else if (66 < innerRoll && innerRoll <= 75)
-        {
-            
-            int tabRoll = getRandomIntInRange(1,5);
-            
+        {            
             switch (tabRoll)
             {
                 case 1: //pl event - static
-                    parser << "ADD FLAVOR TEXT. PL decreased by 1";
+                    parser << "You forget the name of one of your fellow lawmakers. PL decreased by 1.";
                     if (pl > 0) pl--;
                     break;
                 case 2: //pl event - dynamic
@@ -742,14 +729,14 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You lose 1 PL every turn for 3 turns.";
+                        parser << "You make a gaffe and accidently insult a special-interest group. You lose 1 PL every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         plMod = -1;
                     }
                     break;
                 case 3: //cf event - static
-                    parser << "ADD FLAVOR TEXT. You lose 1 CF";
+                    parser << "An accounting error means you have less funds than you thought. You lose 1 CF.";
                     if (cf > 0) cf--;
                     break;
                 case 4: //cf event - dynamic
@@ -760,26 +747,24 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser <<"ADD FLAVOR TEXT. You lose 1 CF every turn for 3 turns.";
+                        parser <<"You are involved in a small scandal and must use campaign funds to deflect it. You lose 1 CF every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         cfMod = -1;
                     }
                     break;
                 case 5: // support event
-                    parser << "ADD FLAVOR TEXT. You lose 2 SP.";
+                    parser << "You publically question the relevance of a fellow lawmaker's bill. You lose 2 SP.";
                     if (support - 2 > 1) support-=2;
                     break;
             }
         }
         else if (76 < innerRoll && innerRoll <= 85)
-        {
-            
-            
+        {   
             switch (tabRoll)
             {
                 case 1: //pl event - static
-                    parser << "ADD FLAVOR TEXT. PL decreased by 1";
+                    parser << "You fail to know the name of the leader of a foreign nation live on TV. PL decreased by 2.";
                     if (pl-=2 < 0) pl = 0;
                     break;
                 case 2: //pl event - dynamic
@@ -790,14 +775,14 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You lose 2 PL every turn for 3 turns.";
+                        parser << "You are caught on a hot mic insulting a fellow lawmaker. You lose 2 PL every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         plMod = -2;
                     }
                     break;
                 case 3: //cf event - static
-                    parser << "ADD FLAVOR TEXT. You lose 2 CF";
+                    parser << "A staffer informs you that they used campaign funds to make an investment with \"some Nigerian Prince\". You lose 2 CF.";
                     if (cf -= 2 < 0) cf = 0;
                     break;
                 case 4: //cf event - dynamic
@@ -808,25 +793,24 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You lose 2 CF every turn for 3 turns.";
+                        parser << "You are involved in a large scandal and must use campaign funds to deflect it. You lose 2 CF every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         cfMod = -2;
                     }
                     break;
                 case 5: // support event
-                    parser << "ADD FLAVOR TEXT. You lose 5 SP.";
+                    parser << "You fillibuster a widely popular bill to gain publicity for an unrelated issue, but it still passes. You lose 5 SP.";
                     if (support - 5 > 1) support-=5;
                     break;
             }
         }
         else // >85
-        {
-            
+        {   
             switch (tabRoll)
             {
                 case 1: //pl event - static
-                    parser << "ADD FLAVOR TEXT. PL decreased by 3";
+                    parser << "You throw up on a foreign dignitary during an official lunch. PL decreased by 3.";
                     if (pl -= 3 < 0) pl = 0;
                     break;
                 case 2: //pl event - dynamic
@@ -837,14 +821,14 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You lose 3 PL every turn for 3 turns."; 
+                        parser << "You give an explosive interview and threaten to throw a reporter off of a balcony. You lose 3 PL every turn for 3 turns."; 
                         bonusActive = true;
                         bonusCounter = 3;
                         plMod = -3;
                     }
                     break;
                 case 3: //cf event - static
-                    parser << "ADD FLAVOR TEXT. You lose 3 CF";
+                    parser << "Campaign finance reform. It happens. You lose 3 CF.";
                     if (cf-=3 < 0) cf = 0;
                     break;
                 case 4: //cf event - dynamic
@@ -855,14 +839,14 @@ void GameScreen::onNextTurn()
                     }
                     else
                     {
-                        parser << "ADD FLAVOR TEXT. You lose 3 CF every turn for 3 turns.";
+                        parser << "You are involved in a massive scandal and must use campaign funds to deflect it.. You lose 3 CF every turn for 3 turns.";
                         bonusActive = true;
                         bonusCounter = 3;
                         cfMod = -3;
                     }
                     break;
                 case 5: // support event
-                    parser << "ADD FLAVOR TEXT. You lose 10 SP.";
+                    parser << "You cast the deciding vote to make a fellow lawmaker's bill fail. You lose 10 SP.";
                     if (support - 10 > 1) support-=10;
                     break;
             }
@@ -871,13 +855,15 @@ void GameScreen::onNextTurn()
     
     if (eventHappens)
     {
+        std::string holder = parser.str();
+        const char* p = holder.c_str();
+        MessageBox(p ,"Events");
+        
         updateUI();
+        
     }
     
-    std::string holder = parser.str();
-    const char* p = holder.c_str();
     
-    MessageBox(p ,"Events");
     
     
     //check for game end conditions.
@@ -911,7 +897,7 @@ void GameScreen::passBill()
         score += curBill->wording;
         billsPassed++;
         
-        //acheviment checks
+        //achievement checks
         //cascade flags just in case
         if (billsPassed >= 15)
         {
