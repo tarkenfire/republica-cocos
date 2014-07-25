@@ -482,7 +482,7 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
 
 void GameScreen::onGameEnd()
 {
-    UserDefault::getInstance()->setIntegerForKey("endScore", score);
+    UserDefault::getInstance()->setIntegerForKey("endScore", billPassed);
     UserDefault::getInstance()->setIntegerForKey("endTurn", turn);
     
     auto newScene = LeaderboardScreen::createScene();
@@ -509,6 +509,13 @@ void GameScreen::onNextTurn()
     support--;
     pc+=2;
     turn++;
+    
+    //check for game end conditions.
+    if (support <= 0 || turn == 2)
+    {
+        onGameEnd();
+        return;
+    }
     
     if (doesBillExist())
     {
@@ -863,15 +870,6 @@ void GameScreen::onNextTurn()
         
     }
     
-    
-    
-    
-    //check for game end conditions.
-    
-    if (support <= 0 || turn == 20)
-    {
-        onGameEnd();
-    }
 }
 
 void GameScreen::createBill()

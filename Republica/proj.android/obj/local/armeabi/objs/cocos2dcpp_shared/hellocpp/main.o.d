@@ -311,7 +311,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/hellocpp/main.o: \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCString.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCNotificationCenter.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h \
- /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./platform/android/jni/JniHelper.h
+ /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./platform/android/jni/JniHelper.h \
+ jni/../../Classes/PlayServicesManager.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -938,3 +939,5 @@ jni/../../Classes/AppDelegate.h:
 /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./deprecated/CCDeprecated.h:
 
 /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/cocos/./platform/android/jni/JniHelper.h:
+
+jni/../../Classes/PlayServicesManager.h:
