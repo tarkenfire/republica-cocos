@@ -43,28 +43,57 @@ bool LeaderboardScreen::init()
     bg->setScaleX(rX);
     bg->setScaleY(rY);
     
-    //button
-    Vector<MenuItem*> item;
+    //home button
+    Vector<MenuItem*> items;
+    
+    auto bSub = MenuItemImage::create(
+                                          "btnSubmit.png",
+                                          "btnSubmitPressed.png",
+                                          CC_CALLBACK_1(LeaderboardScreen::menuSelectCallback, this));
+    bSub->setTag(1);
+    
+    items.pushBack(bSub);
+    
     
     auto bAch = MenuItemImage::create(
                                           "btnBack.png",
                                           "btnBackPressed.png",
-                                          CC_CALLBACK_1(LeaderboardScreen::menuSelectCallback, this)
-                                          );
+                                          CC_CALLBACK_1(LeaderboardScreen::menuSelectCallback, this));
     
-    bAch->setPosition(Vec2( visibleSize.width / 2, bAch->getContentSize().height + 40));
-    bAch->setTag(1);
+    bAch->setTag(2);
     
-    item.pushBack(bAch);
+    items.pushBack(bAch);
     
-    auto soloMenu = Menu::createWithArray(item);
-    soloMenu->setPosition(Vec2::ZERO);
+    auto soloMenu = Menu::createWithArray(items);
+    soloMenu->setPosition(Vec2(visibleSize.width / 2, bAch->getContentSize().height + 40));
+    soloMenu->alignItemsVerticallyWithPadding(20);
+    
+    items.clear();
+    
+    auto bShare = MenuItemImage::create(
+                                          "btnShare.png",
+                                          "btnSharePressed.png",
+                                          CC_CALLBACK_1(LeaderboardScreen::menuSelectCallback, this));
+    bShare->setTag(3);
+    items.pushBack(bShare);
+    
+    auto bOnline = MenuItemImage::create(
+                                          "btnOnline.png",
+                                          "btnOnlinePressed.png",
+                                          CC_CALLBACK_1(LeaderboardScreen::menuSelectCallback, this));
+    bOnline->setTag(4);
+    items.pushBack(bOnline);
+    
+    auto topMenu = Menu::createWithArray(items);
+    topMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.width - (visibleSize.width / 8)));
+    topMenu->alignItemsHorizontallyWithPadding(20);
     
     //other ui
-    int l_score = UserDefault::getInstance()->getIntegerForKey("endScore");
+    int l_score = UserDefault::getInstance()->getIntegerForKey("endScore", 0);
     
     textIn = TextFieldTTF::textFieldWithPlaceHolder("High Scores", "Arial", 72);
     textIn->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.3));
+    
     
     placeOne = LabelTTF::create("First Place", "Arial", 64);
     placeOne->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.5));
@@ -88,7 +117,8 @@ bool LeaderboardScreen::init()
     
     this->addChild(bg, -1);
     this->addChild(soloMenu, 1);
-    this->addChild(textIn, 1);
+    this->addChild(topMenu, 1);
+    this->addChild(textIn, 2);
     this->addChild(placeOne, 2);
     this->addChild(placeTwo, 2);
     this->addChild(placeThree, 2);
@@ -98,6 +128,16 @@ bool LeaderboardScreen::init()
     
     //check if player has highscore
     checkVal = checkForHighScore(l_score);
+    
+    if (checkVal != -1) //then player has high score
+    {
+        MessageBox("You have a new high score, enter your name now.","New High Score");
+        textIn->attachWithIME();
+    }
+    else
+    {
+        
+    }
 }
 
 void LeaderboardScreen::menuSelectCallback(cocos2d::Ref* sender)
@@ -107,9 +147,6 @@ void LeaderboardScreen::menuSelectCallback(cocos2d::Ref* sender)
     Director::getInstance()->replaceScene(newScene);
 }
 
-void LeaderboardScreen::keyboardWillShow(cocos2d::IMEKeyboardNotificationInfo &info){}
-void LeaderboardScreen::keyboardWillHide(cocos2d::IMEKeyboardNotificationInfo &info){}
-//void LeaderboardScreen::ccTouchesBegan(cocos2d::Set *pTouches, cocos2d::Event *pEvent){}
 
 int LeaderboardScreen::checkForHighScore(int newScore)
 {
@@ -122,7 +159,7 @@ int LeaderboardScreen::checkForHighScore(int newScore)
         return 1;
     }
     
-    int check = UserDefault::getInstance()->getIntegerForKey("top2", 0);
+    check = UserDefault::getInstance()->getIntegerForKey("top2", 0);
     
     //2
     if (newScore > check)
@@ -130,19 +167,19 @@ int LeaderboardScreen::checkForHighScore(int newScore)
         return 2;
     }
     
-    int check = UserDefault::getInstance()->getIntegerForKey("top3", 0);
+    check = UserDefault::getInstance()->getIntegerForKey("top3", 0);
     if (newScore > check)
     {
         return 3;
     }
     
-    int check = UserDefault::getInstance()->getIntegerForKey("top4", 0)
+    check = UserDefault::getInstance()->getIntegerForKey("top4", 0);
     if (newScore > check)
     {
         return 4;
     }
     
-    int check = UserDefault::getInstance()->getIntegerForKey("top5", 0);
+    check = UserDefault::getInstance()->getIntegerForKey("top5", 0);
     if (newScore > check)
     {
         return 5;

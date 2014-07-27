@@ -482,7 +482,7 @@ void GameScreen::menuSelectCallback(cocos2d::Ref* sender)
 
 void GameScreen::onGameEnd()
 {
-    UserDefault::getInstance()->setIntegerForKey("endScore", billPassed);
+    UserDefault::getInstance()->setIntegerForKey("endScore", billsPassed);
     UserDefault::getInstance()->setIntegerForKey("endTurn", turn);
     
     auto newScene = LeaderboardScreen::createScene();
