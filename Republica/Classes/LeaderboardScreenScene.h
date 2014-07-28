@@ -33,6 +33,7 @@ class LeaderboardScreen : public cocos2d::Layer
         
         int checkForHighScore(int newScore);
         void addNewHighScore(int newScore, int pos, std::string name);
+        void updateUI();
         
     private:
         std::map<int, std::string> localTopList;

@@ -9,6 +9,8 @@
 #include "extensions/cocos-ext.h"
 #include "SplashScreenScene.h"
 
+#include <sstream>
+
 USING_NS_CC;
 
 Scene* LeaderboardScreen::createScene()
@@ -89,7 +91,7 @@ bool LeaderboardScreen::init()
     topMenu->alignItemsHorizontallyWithPadding(20);
     
     //other ui
-    int l_score = UserDefault::getInstance()->getIntegerForKey("endScore", 0);
+    playerScore = UserDefault::getInstance()->getIntegerForKey("endScore", 0);
     
     textIn = TextFieldTTF::textFieldWithPlaceHolder("High Scores", "Arial", 72);
     textIn->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.3));
@@ -127,7 +129,7 @@ bool LeaderboardScreen::init()
     
     
     //check if player has highscore
-    checkVal = checkForHighScore(l_score);
+    checkVal = checkForHighScore(playerScore);
     
     if (checkVal != -1) //then player has high score
     {
@@ -138,15 +140,30 @@ bool LeaderboardScreen::init()
     {
         
     }
+    
+    updateUI();
 }
 
 void LeaderboardScreen::menuSelectCallback(cocos2d::Ref* sender)
 {
-    //only one button, no checks needed
+ 
+    MenuItem* button = (MenuItem*) sender;
     auto newScene = SplashScreen::createScene();
-    Director::getInstance()->replaceScene(newScene);
+    
+    switch (button->getTag())
+    {
+        case 1: //submit score
+            addNewHighScore(playerScore, checkVal, textIn->getString());
+            break;
+        case 2: //back to main menu
+            Director::getInstance()->replaceScene(newScene);        
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+    } 
 }
-
 
 int LeaderboardScreen::checkForHighScore(int newScore)
 {
@@ -188,13 +205,83 @@ int LeaderboardScreen::checkForHighScore(int newScore)
     return -1;
 }
 
-void addNewHighScore(int newScore, int pos, std::string name)
+void LeaderboardScreen::addNewHighScore(int newScore, int pos, std::string name)
 {
+    auto udRef = UserDefault::getInstance();
+    
     switch (pos)
     {
         case -1:
             //no high score
             break;
-            
+        case 1:
+            udRef->setStringForKey("top1name", name);
+            udRef->setIntegerForKey("top1", newScore);
+            break;
+        case 2:
+            udRef->setStringForKey("top2name", name);
+            udRef->setIntegerForKey("top2", newScore);
+            break;
+        case 3:
+            udRef->setStringForKey("top3name", name);
+            udRef->setIntegerForKey("top3", newScore);
+            break;
+        case 4:
+            udRef->setStringForKey("top4name", name);
+            udRef->setIntegerForKey("top4", newScore);
+            break;
+        case 5:
+            udRef->setStringForKey("top5name", name);
+            udRef->setIntegerForKey("top5", newScore);
+            break;
     }
+    
+    updateUI();
+}
+
+void LeaderboardScreen::updateUI()
+{
+    std::ostringstream parser;
+    std::string holderName;
+    auto udRef = UserDefault::getInstance();
+    int holderScore;
+    
+    
+    //1st position
+    parser << udRef->getStringForKey("top1name", "noone") << " : " << udRef->getIntegerForKey("top1", 0);
+    placeOne->setString(parser.str());
+    
+    parser.str(std::string());
+    parser.clear();
+    
+    //2nd position
+    parser << udRef->getStringForKey("top2name", "noone") << " : " << udRef->getIntegerForKey("top2", 0);
+    placeTwo->setString(parser.str());
+    
+    parser.str(std::string());
+    parser.clear();
+    
+    //3rd position
+    parser << udRef->getStringForKey("top3name", "noone") << " : " << udRef->getIntegerForKey("top3", 0);
+    placeThree->setString(parser.str());
+    
+    parser.str(std::string());
+    parser.clear();
+    
+    //4th position
+    parser << udRef->getStringForKey("top4name", "noone") << " : " << udRef->getIntegerForKey("top4", 0);
+    placeFour->setString(parser.str());
+    
+    parser.str(std::string());
+    parser.clear();
+    
+    //5th position
+    parser << udRef->getStringForKey("top5name", "noone") << " : " << udRef->getIntegerForKey("top5", 0);
+    placeFive->setString(parser.str());
+    
+    parser.str(std::string());
+    parser.clear();
+    
+
+    
 }
