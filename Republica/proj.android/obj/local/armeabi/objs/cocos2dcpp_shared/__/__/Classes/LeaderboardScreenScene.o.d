@@ -343,7 +343,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/LeaderboardScreenScene.o:
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/physics-nodes/CCPhysicsSprite.h \
  /Users/tarkenfire/Desktop/republica-cocos/Republica/proj.android/../cocos2d/extensions/../extensions/assets-manager/AssetsManager.h \
  jni/../../Classes/SplashScreenScene.h \
- jni/../../Classes/GameScreenScene.h jni/../../Classes/ModalDialog.h
+ jni/../../Classes/GameScreenScene.h jni/../../Classes/ModalDialog.h \
+ jni/../../cocos2d/cocos/platform/android/jni/JniHelper.h
 
 jni/../../Classes/LeaderboardScreenScene.h:
 
@@ -1034,3 +1035,5 @@ jni/../../Classes/SplashScreenScene.h:
 jni/../../Classes/GameScreenScene.h:
 
 jni/../../Classes/ModalDialog.h:
+
+jni/../../cocos2d/cocos/platform/android/jni/JniHelper.h:

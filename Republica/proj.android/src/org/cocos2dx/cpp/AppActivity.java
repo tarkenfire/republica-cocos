@@ -28,5 +28,27 @@ package org.cocos2dx.cpp;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
 public class AppActivity extends Cocos2dxActivity {
+	
+	private static Activity selfRef = null;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		AppActivity.selfRef = this;
+	}
+	
+	public static void launchShareIntent(String text)
+	{
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+		sendIntent.setType("text/plain");
+		selfRef.startActivity(sendIntent);
+	}
 }

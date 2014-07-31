@@ -11,6 +11,9 @@
 
 #include <sstream>
 
+#include <jni.h>
+#include <JniHelper.h>
+
 USING_NS_CC;
 
 Scene* LeaderboardScreen::createScene()
@@ -87,7 +90,7 @@ bool LeaderboardScreen::init()
     items.pushBack(bOnline);
     
     auto topMenu = Menu::createWithArray(items);
-    topMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.width - (visibleSize.width / 8)));
+    topMenu->setPosition(Vec2(visibleSize.width / 2, visibleSize.height - (bOnline->getContentSize().height + 40)));
     topMenu->alignItemsHorizontallyWithPadding(20);
     
     //other ui
@@ -158,7 +161,8 @@ void LeaderboardScreen::menuSelectCallback(cocos2d::Ref* sender)
         case 2: //back to main menu
             Director::getInstance()->replaceScene(newScene);        
             break;
-        case 3:
+        case 3: //share button
+            launchShareIntent("Hi, this is a test");
             break;
         case 4:
             break;
@@ -281,7 +285,22 @@ void LeaderboardScreen::updateUI()
     
     parser.str(std::string());
     parser.clear();
-    
+}
 
-    
+extern "C"
+{
+    void launchShareIntent(const char* text)
+    {
+        JniMethodInfo target;
+        
+        if (JniHelper::getStaticMethodInfo(target,
+                                           "org/cocos2dx/cpp/AppActivity",
+                                           "launchShareIntent",
+                                           "(Ljava/lang/String;)V"))
+        {
+            jstring stringArg = target.env->NewStringUTF(text);
+            target.env->CallStaticVoidMethod(target.classID, target.methodID, stringArg);
+        }
+        
+    }
 }

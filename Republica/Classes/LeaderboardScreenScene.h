@@ -40,4 +40,9 @@ class LeaderboardScreen : public cocos2d::Layer
          
 };
 
+extern "C"
+{
+    extern void launchShareIntent(const char* text);
+}
+
 #endif
