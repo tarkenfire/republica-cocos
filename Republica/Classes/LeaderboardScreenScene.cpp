@@ -300,7 +300,9 @@ extern "C"
         {
             jstring stringArg = target.env->NewStringUTF(text);
             target.env->CallStaticVoidMethod(target.classID, target.methodID, stringArg);
-        }
-        
+        }    
     }
+    
+    
+    
 }

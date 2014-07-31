@@ -28,6 +28,13 @@ package org.cocos2dx.cpp;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+
+
+
+
+import com.google.example.games.basegameutils.GameHelper;
+import com.google.example.games.basegameutils.GameHelper.GameHelperListener;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,14 +42,53 @@ import android.os.Bundle;
 public class AppActivity extends Cocos2dxActivity {
 	
 	private static Activity selfRef = null;
+	GameHelper mHelper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		AppActivity.selfRef = this;
+
+		//create helper
+		mHelper = new GameHelper(this, GameHelper.CLIENT_ALL);
+
+	    GameHelperListener listener = new GameHelper.GameHelperListener() {
+	        @Override
+	        public void onSignInSucceeded() {
+	            // handle sign-in succeess
+	        }
+	        @Override
+	        public void onSignInFailed() {
+	            // handle sign-in failure (e.g. show Sign In button)
+	        }
+
+	    };
+	    mHelper.setup(listener);
 	}
 	
+	@Override
+	protected void onStart() 
+	{
+	    super.onStart();
+	    mHelper.onStart(this);
+	}
+
+	@Override
+	protected void onStop() 
+	{
+	    super.onStop();
+	    mHelper.onStop();
+	}
+
+	@Override
+	protected void onActivityResult(int request, int response, Intent data) 
+	{
+	    super.onActivityResult(request, response, data);
+	    mHelper.onActivityResult(request, response, data);
+	}
+
+	//methods called from C++
 	public static void launchShareIntent(String text)
 	{
 		Intent sendIntent = new Intent();
