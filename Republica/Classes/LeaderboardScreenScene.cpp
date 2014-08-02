@@ -302,7 +302,4 @@ extern "C"
             target.env->CallStaticVoidMethod(target.classID, target.methodID, stringArg);
         }    
     }
-    
-    
-    
 }

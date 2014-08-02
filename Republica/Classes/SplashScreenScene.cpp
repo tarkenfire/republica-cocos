@@ -8,6 +8,9 @@
 #include "SplashScreenScene.h"
 #include "AchScreenScene.h"
 
+#include <jni.h>
+#include <JniHelper.h>
+
 USING_NS_CC;
 
 Scene* SplashScreen::createScene()
@@ -119,7 +122,6 @@ void SplashScreen::menuSelectCallback(Ref* sender)
 {
     MenuItem* button = (MenuItem*) sender;
     auto newScene = GameScreen::createScene();
-    auto achScene = AchScreen::createScene();
     
     switch (button->getTag())
     {
@@ -133,10 +135,27 @@ void SplashScreen::menuSelectCallback(Ref* sender)
             MessageBox("Feature Not Implemeted.", "Settings");
             break;
         case 5: // ach
-            Director::getInstance()->replaceScene(achScene);
+            showAchievements();
             break;
         default: //error
             break;
     }
-    
 }
+
+extern "C"
+{
+    void showAchievements()
+    {
+        JniMethodInfo target;
+        
+        if (JniHelper::getStaticMethodInfo(target,
+                                           "org/cocos2dx/cpp/AppActivity",
+                                           "showAchievements",
+                                           "()V"))
+        {
+            target.env->CallStaticVoidMethod(target.classID, target.methodID);
+        }    
+    }    
+}
+
+

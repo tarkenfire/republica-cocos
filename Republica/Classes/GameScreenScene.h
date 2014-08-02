@@ -38,6 +38,9 @@ class GameScreen : public cocos2d::Layer
         static const int BTN_FUNDRAISE = 24;
         static const int BTN_SOAPBOX = 25;
         
+        //google play ach'ment constants
+       // static const std::
+        
         //structs
         
         struct Bill
@@ -106,5 +109,10 @@ class GameScreen : public cocos2d::Layer
         void menuSelectCallback(cocos2d::Ref* sender);
         
 };
+
+extern "C"
+{
+    extern void unlockAchievement(const char* text);
+}
 
 #endif

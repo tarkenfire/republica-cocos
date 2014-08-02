@@ -32,6 +32,10 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 
 
 
+
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.GameHelper;
 import com.google.example.games.basegameutils.GameHelper.GameHelperListener;
 
@@ -42,21 +46,24 @@ import android.os.Bundle;
 public class AppActivity extends Cocos2dxActivity {
 	
 	private static Activity selfRef = null;
+	private static GoogleApiClient clientRef = null;
 	GameHelper mHelper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		//static refs for game lib callings
 		AppActivity.selfRef = this;
 
 		//create helper
-		mHelper = new GameHelper(this, GameHelper.CLIENT_ALL);
+		mHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
 
 	    GameHelperListener listener = new GameHelper.GameHelperListener() {
 	        @Override
 	        public void onSignInSucceeded() {
 	            // handle sign-in succeess
+	        	AppActivity.clientRef = mHelper.getApiClient();
 	        }
 	        @Override
 	        public void onSignInFailed() {
@@ -96,5 +103,21 @@ public class AppActivity extends Cocos2dxActivity {
 		sendIntent.putExtra(Intent.EXTRA_TEXT, text);
 		sendIntent.setType("text/plain");
 		selfRef.startActivity(sendIntent);
+	}
+	
+	public static void unlockAchievement(String id)
+	{
+		Games.Achievements.unlock(clientRef, id);
+	}
+	
+	public static void incrementAchievement(String id, int value)
+	{
+		
+	}
+	
+	public static void showAchievements()
+	{
+		Intent sender = Games.Achievements.getAchievementsIntent(clientRef);
+		selfRef.startActivityForResult(sender, 0);
 	}
 }

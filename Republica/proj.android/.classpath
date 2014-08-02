@@ -8,6 +8,5 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/libcocos2dx"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/google-play-services_lib"/>
-	<classpathentry kind="lib" path="/google-play-services_lib/libs/google-play-services.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

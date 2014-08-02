@@ -22,4 +22,9 @@ class SplashScreen : public cocos2d::Layer
         void menuSelectCallback(cocos2d::Ref* sender);
 };
 
+extern "C"
+{
+    extern void showAchievements();
+}
+
 #endif

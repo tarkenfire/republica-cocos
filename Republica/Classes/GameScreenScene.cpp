@@ -10,6 +10,9 @@
 #include <sstream>
 #include <random>
 
+#include <jni.h>
+#include <JniHelper.h>
+
 USING_NS_CC;
 
 Scene* GameScreen::createScene()
@@ -486,7 +489,10 @@ void GameScreen::onGameEnd()
     UserDefault::getInstance()->setIntegerForKey("endTurn", turn);
     
     auto newScene = LeaderboardScreen::createScene();
-    
+ 
+ 
+ 
+    unlockAchievement("CgkI56rvkNQREAIQBg");   
     
     //check ach'ments
     if (billsPassed == 0)
@@ -969,4 +975,21 @@ int GameScreen::getRandomIntInRange(int min, int max)
 bool GameScreen::doesBillExist()
 {
     return !(curBill == nullptr);
+}
+
+extern "C"
+{
+    void unlockAchievement(const char* text)
+    {
+        JniMethodInfo target;
+        
+        if (JniHelper::getStaticMethodInfo(target,
+                                           "org/cocos2dx/cpp/AppActivity",
+                                           "unlockAchievement",
+                                           "(Ljava/lang/String;)V"))
+        {
+            jstring stringArg = target.env->NewStringUTF(text);
+            target.env->CallStaticVoidMethod(target.classID, target.methodID, stringArg);
+        }    
+    }    
 }
