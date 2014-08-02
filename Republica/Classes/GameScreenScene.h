@@ -38,9 +38,6 @@ class GameScreen : public cocos2d::Layer
         static const int BTN_FUNDRAISE = 24;
         static const int BTN_SOAPBOX = 25;
         
-        //google play ach'ment constants
-       // static const std::
-        
         //structs
         
         struct Bill

@@ -110,11 +110,6 @@ public class AppActivity extends Cocos2dxActivity {
 		Games.Achievements.unlock(clientRef, id);
 	}
 	
-	public static void incrementAchievement(String id, int value)
-	{
-		
-	}
-	
 	public static void showAchievements()
 	{
 		Intent sender = Games.Achievements.getAchievementsIntent(clientRef);

@@ -489,19 +489,18 @@ void GameScreen::onGameEnd()
     UserDefault::getInstance()->setIntegerForKey("endTurn", turn);
     
     auto newScene = LeaderboardScreen::createScene();
- 
- 
- 
-    unlockAchievement("CgkI56rvkNQREAIQBg");   
-    
+     
     //check ach'ments
     if (billsPassed == 0)
     {
+        //lame duck
+        unlockAchievement("CgkI56rvkNQREAIQBg");   
         UserDefault::getInstance()->setBoolForKey("duck", true);
     }
     
     if (support > 0)
     {
+        unlockAchievement("CgkI56rvkNQREAIQBQ");   
         UserDefault::getInstance()->setBoolForKey("com", true);
     }
     
@@ -517,7 +516,7 @@ void GameScreen::onNextTurn()
     turn++;
     
     //check for game end conditions.
-    if (support <= 0 || turn == 2)
+    if (support <= 0 || turn == 20)
     {
         onGameEnd();
         return;
@@ -905,17 +904,21 @@ void GameScreen::passBill()
         //cascade flags just in case
         if (billsPassed >= 15)
         {
+            unlockAchievement("CgkI56rvkNQREAIQAw");
+            unlockAchievement("CgkI56rvkNQREAIQBA");
             UserDefault::getInstance()->setBoolForKey("p15", true);
             UserDefault::getInstance()->setBoolForKey("p10", true);
             UserDefault::getInstance()->setBoolForKey("p5", true);
         }
         else if (billsPassed >= 10)
         {
+            unlockAchievement("CgkI56rvkNQREAIQAg");
             UserDefault::getInstance()->setBoolForKey("p10", true);
             UserDefault::getInstance()->setBoolForKey("p5", true);
         }
         else if (billsPassed >= 5)
         {
+            unlockAchievement("CgkI56rvkNQREAIQAQ");
             UserDefault::getInstance()->setBoolForKey("p5", true);
         }
     }
@@ -991,5 +994,5 @@ extern "C"
             jstring stringArg = target.env->NewStringUTF(text);
             target.env->CallStaticVoidMethod(target.classID, target.methodID, stringArg);
         }    
-    }    
+    }
 }
